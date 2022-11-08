@@ -45,7 +45,8 @@
 
     </resultMap>
 
-    <select id="carbonInfoList" resultType="com.lgUCamp.catchMe.DTO.CarbonInfo">
+    <select id="carbonInfoList" resultType="com.lgUCamp.catchMe.DTO.CarbonInfo"
+                                resultMap="carbonInfo">
         SELECT
                INFO_NO
              , INFO_TITLE
