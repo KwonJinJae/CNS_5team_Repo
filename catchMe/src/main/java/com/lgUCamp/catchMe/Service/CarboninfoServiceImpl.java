@@ -15,6 +15,7 @@ public class CarboninfoServiceImpl implements CarbonInfoService{
 
     public ArrayList<CarbonInfoDTO> carbonInfoList(){
 
+
         return carbonInfoMapper.carbonInfoList();
     }
 }
