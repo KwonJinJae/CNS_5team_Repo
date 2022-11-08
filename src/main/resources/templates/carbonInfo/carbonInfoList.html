@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <table>
+    <tr th:each="carbon : ${carbonList}">
+      <td th:text="${carbon.info_no}"></td>
+    </tr>
+  </table>
+</body>
+</html>
