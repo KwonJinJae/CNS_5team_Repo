@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Catch me!</title>
+    <style>
+        .infoTable{
+            margin: 0 auto;
+        }
+        .infoTable th{
+            background-color: #D9D9D9;
+        }
+        .infoTable th,tr {
+
+            border: 1px solid #D9D9D9;
+            border-collapse: collapse;
+        }
+        .infoTable thead, tfoot{
+            text-align:center;
+        }
+
+        #info_div{
+	        width: 700px;
+
+        }
+        .infoListButton{
+            text-decoration: none;
+        }
+        #infoOne_btn{
+            margin: 0 auto;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="infoOne">
+        <form>
+            <table class="infoTable">
+                <thead>
+                <tr>
+                    <th width="100" height="35" style="text-align: center;">제목</th>
+                    <td colspan="3" height="35" th:text="${carbonInfo.infoTitle}"></td>
+                </tr>
+                <tr>
+                    <th width="100" height="35" style="text-align: center;">작성일</th>
+                    <td width="350" height="35" th:text="${carbonInfo.infoDate}"></td>
+                    <th width="100" height="35" style="text-align: center;">조회수</th>
+                    <td width="350" height="35" th:text="${carbonInfo.infoView}"></td>
+                </tr>
+                <tr>
+                    <th width="100" height="35" style="text-align: center;">출처</th>
+                    <td width="350" height="35" th:text="${carbonInfo.infoSource}"></td>
+                    <th width="100" height="35" style="text-align: center;">작성자</th>
+<!--                    <td width="350" height="35" th:text="${carbonInfo.admin.adminJob}"></td>-->
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td width="100"></td>
+                    <td colspan="3">
+                        <br>
+                        <br>
+                        <div id="info_div" th:utext="${carbonInfo.infoContent}">
+                            환경부에서 제작한 지구의 날 및 기후변화주관 관련 콘텐츠입니다.
+                            해당 콘텐츠는 2020년 12월까지 지구의 날 50주년 및 제12회 기후변화주간 홍보용으로 사용가능합니다.
+                            원본 훼손 없이 각 기관의 로고 추가만 가능하며, 이 외에 수정이 필요한 경우 환경부 신기후체제대응팀과의 사전 협의 부탁드립니다.
+                        </div>
+                        <br>
+                        <br>
+                    </td>
+                </tr>
+                <tr>
+                    <th width="100" height="35" style="text-align: center;">첨부파일</th>
+                    <td colspan="3"> <a th:href="@{/carbonInfo.carbonInfoFileList.infoFilePath/}
+                                                                  + ${carbonInfo.carbonInfoFileList.infoFileName}"></a> </td>
+                </tr>
+                </tbody>
+            </table>
+            <div id="infoOne_btn">
+                <button>삭제</button> <button >목록으로</button><button>수정</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

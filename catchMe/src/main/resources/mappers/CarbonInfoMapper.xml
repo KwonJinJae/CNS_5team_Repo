@@ -4,7 +4,74 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.lgUCamp.catchMe.Mapper.CarbonInfoMapper">
-    <select id="carbonInfoList" resultType="com.lgUCamp.catchMe.DTO.CarbonInfoDTO">
-        select * from tbl_carbon_info
+
+    <resultMap id="carbonInfo" type="com.lgUCamp.catchMe.DTO.CarbonInfo">
+        <id column="info_no" property="infoNo"/>
+        <result column="info_title" property="infoTitle" />
+        <result column="info_date" property="infoDate" />
+        <result column="info_view" property="infoView" />
+        <result column="info_content" property="infoContent" />
+        <result column="info_source" property="infoSource" />
+        <result column="admin_no" property="adminNo" />
+    </resultMap>
+
+    <resultMap id="carbonInfoFile" type="com.lgUCamp.catchMe.DTO.CarbonInfoFile">
+        <id column="info_no" property="infoNo"/>
+        <result column="info_file_name" property="infoFileName"/>
+        <result column="info_file_path" property="infoFilePath"/>
+    </resultMap>
+
+    <resultMap id="admin" type="com.lgUCamp.catchMe.DTO.Admin">
+        <id column="admin_no" property="adminNo"/>
+        <result column="admin_job" property="adminJob"/>
+        <result column="adminId" property="adminId"/>
+        <result column="adminPass" property="adminPass"/>
+    </resultMap>
+    
+    <resultMap id="adminCarbonInfoFile" type="com.lgUCamp.catchMe.DTO.AdminCarbonFile">
+        <id column="info_no" property="infoNo"/>
+        <result column="info_title" property="infoTitle" />
+        <result column="info_date" property="infoDate" />
+        <result column="info_view" property="infoView" />
+        <result column="info_content" property="infoContent" />
+        <result column="info_source" property="infoSource" />
+        <result column="admin_no" property="adminNo" />
+        <association column="info_no" property="carbonInfoFileList"
+                     javaType="com.lgUCamp.catchMe.DTO.CarbonInfoFile">
+            <id column="info_no" property="infoNo" />
+            <result column="info_file_name" property="infoFileName"/>
+            <result column="info_file_path" property="infoFilePath" />
+        </association>
+
+    </resultMap>
+
+    <select id="carbonInfoList" resultType="com.lgUCamp.catchMe.DTO.CarbonInfo">
+        SELECT
+               INFO_NO
+             , INFO_TITLE
+             , INFO_DATE
+             , INFO_VIEW
+          FROM TBL_CARBON_INFO
+         ORDER BY INFO_DATE DESC
+    </select>
+
+    <select id="carbonInfoDetail" resultMap="adminCarbonInfoFile"
+            resultType="com.lgUCamp.catchMe.DTO.AdminCarbonFile">
+        SELECT
+              A.INFO_NO
+            , A.INFO_TITLE
+            , A.INFO_DATE
+            , A.INFO_VIEW
+            , A.INFO_CONTENT
+            , A.INFO_SOURCE
+            , A.ADMIN_NO
+            , B.INFO_FILE_NAME
+            , B.INFO_FILE_PATH
+<!--            , C.ADMIN_ID-->
+<!--            , C.ADMIN_JOB-->
+        FROM TBL_CARBON_INFO A
+        INNER JOIN TBL_CARBON_INFO_FILE B ON (A.INFO_NO = B.INFO_NO)
+<!--        JOIN TBL_ADMIN C ON (A.ADMIN_NO = C.ADMIN_NO)-->
+       WHERE A.INFO_NO = #{infoNo}
     </select>
 </mapper>
