@@ -22,8 +22,9 @@
   <!-- Custom styles for this template -->
   <link href="/css/header.css" rel="stylesheet">
   <link href="/css/login.css" rel="stylesheet">
+  <link href="/css/findform.css" rel="stylesheet">
   <link href="/css/style-responsive.css" rel="stylesheet">
-  
+
   <!-- =======================================================
     Template Name: Dashio
     Template URL: https://templatemag.com/dashio-bootstrap-admin-template/
@@ -39,23 +40,23 @@
       *********************************************************************************************************************************************************** -->
   <div id="login-page">
     <div class="container">
-      <div class="form-login">
-        <h2 class="form-login-heading">sign in now</h2>
+      <form class="form-login" action="index.html">
+        <h2 class="form-login-heading">forgot your password?</h2>
         <div class="login-wrap">
           <div class="login-wrapper">
-            <div class="login-img">
-              <img src="img/logo.jpg" />
-            </div>
-            <div class="login-inputForm">
-              <form action="/loginPage" method="post">
-                <div id="login-id">
-                  <input type="text" class="form-control" placeholder="아이디 입력해주세요" autofocus name="username">
-                </div>
-                <div id="login-pw">
-                  <input type="password" class="form-control" placeholder="비밀번호 입력해주세요" name="password">
-                </div>
-                <button class="btn btn-theme btn-block login-button" type="submit"><i class="fa fa-lock"></i> 로그인</button>
-              </form>
+            <table class="login-inputForm">
+              <tr>
+                <td>아이디</td>
+                <td id="login-id"><input type="text" class="form-control" placeholder="아이디를 입력해주세요" autofocus></td>
+              </tr>
+              <tr>
+                <td>휴대전화</td>
+                <td id="login-pw"><input type="password" class="form-control" placeholder="휴대전화를 입력해주세요"></td>
+              </tr>
+                
+            </table>
+            <div class="login-buttonForm">
+                <button class="btn btn-theme btn-block login-button" href="index.html" type="submit"><i class="fa fa-lock"></i> 비밀번호 찾기</button>
             </div>
           </div>
           <div class="login-social-link centered">
@@ -66,7 +67,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
   <!-- js placed at the end of the document so the pages load faster -->

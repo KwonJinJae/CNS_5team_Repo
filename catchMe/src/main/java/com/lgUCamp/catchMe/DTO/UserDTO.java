@@ -3,13 +3,12 @@ package com.lgUCamp.catchMe.DTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 
 @Data
 @NoArgsConstructor
@@ -27,11 +26,14 @@ public class UserDTO implements UserDetails {
     private String join_date;
     private String user_img;
     private String user_img_path;
-    private String authority_code;
+    private String authority_name;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(new SimpleGrantedAuthority(this.authority_code));
+        ArrayList<GrantedAuthority> authList = new ArrayList<GrantedAuthority>();
+        authList.add(new SimpleGrantedAuthority(authority_name));
+        System.out.println(authList);
+        return authList;
     }
 
     @Override

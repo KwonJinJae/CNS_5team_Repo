@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserMapper {
 
-    UserDTO getUserInfo(String user_id);
+    UserDTO getUserInfo(String userId);
 
     void saveUser(UserDTO userDTO);
 }

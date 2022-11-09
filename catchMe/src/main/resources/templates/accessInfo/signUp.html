@@ -14,7 +14,7 @@
   <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Bootstrap core CSS -->
-  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
   <!--external css-->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,6 +22,8 @@
   <!-- Custom styles for this template -->
   <link href="/css/header.css" rel="stylesheet">
   <link href="/css/login.css" rel="stylesheet">
+  <!-- <link href="css/findform.css" rel="stylesheet"> -->
+  <link href="/css/register.css" rel="stylesheet">
   <link href="/css/style-responsive.css" rel="stylesheet">
   
   <!-- =======================================================
@@ -38,35 +40,52 @@
       MAIN CONTENT
       *********************************************************************************************************************************************************** -->
   <div id="login-page">
-    <div class="container">
-      <div class="form-login">
-        <h2 class="form-login-heading">sign in now</h2>
+    <div>
+      <form class="form-login" action="index.html">
+        <h2 class="form-login-heading">sign up now</h2>
         <div class="login-wrap">
-          <div class="login-wrapper">
-            <div class="login-img">
-              <img src="img/logo.jpg" />
-            </div>
-            <div class="login-inputForm">
-              <form action="/loginPage" method="post">
-                <div id="login-id">
-                  <input type="text" class="form-control" placeholder="아이디 입력해주세요" autofocus name="username">
-                </div>
-                <div id="login-pw">
-                  <input type="password" class="form-control" placeholder="비밀번호 입력해주세요" name="password">
-                </div>
-                <button class="btn btn-theme btn-block login-button" type="submit"><i class="fa fa-lock"></i> 로그인</button>
-              </form>
-            </div>
-          </div>
+          <table class="login-inputForm">
+            <tr>
+              <td>아이디</td>
+              <td class="registerForm"><input type="text" class="form-control" placeholder="ID" autofocus></td>
+            </tr>
+            <tr>
+              <td>비밀번호</td>
+              <td class="registerForm"><input type="password" class="form-control" placeholder="Password"></td>
+            </tr>
+            <tr>
+              <td>비밀번호 확인</td>
+              <td class="registerForm"><input type="password" class="form-control" placeholder="Password"></td>
+            </tr>
+            <tr>
+              <td>성함</td>
+              <td class="registerForm"><input type="text" class="form-control" placeholder="Name"></td>
+            </tr>
+            <tr>
+              <td>닉네임</td>
+              <td class="registerForm"><input type="text" class="form-control" placeholder="Nickname"></td>
+            </tr>
+            <tr>
+              <td>생년월일</td>
+              <td class="registerForm"><input type="text" class="form-control" placeholder="Birth"></td>
+            </tr>
+            <tr>
+              <td>이메일</td>
+              <td class="registerForm"><input type="email" class="form-control" placeholder="E-mail"></td>
+            </tr>
+            <tr>
+              <td>휴대전화</td>
+              <td class="registerForm"><input type="text" class="form-control" placeholder="Phone"></td>
+            </tr>
+          </table>
           <div class="login-social-link centered">
-            <div class="login-findForm">
-              <a href="/login/findID" class="login-findForm-btn">아이디 찾기</a> |
-              <a href="/login/findPwd" class="login-findForm-btn">비밀번호 찾기</a> |
-              <a href="/signUp" class="login-findForm-btn">회원가입</a>
-            </div>
+            <div class="login-findForm"></div>
           </div>
         </div>
-      </div>
+        <div class="buttonForm">
+          <button class="btn btn-theme btn-block registerButton" href="index.html" type="submit"><i class="fa fa-lock"></i>회원가입</button>
+        </div>
+      </form>
     </div>
   </div>
   <!-- js placed at the end of the document so the pages load faster -->
