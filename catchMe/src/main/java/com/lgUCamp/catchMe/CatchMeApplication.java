@@ -12,6 +12,7 @@ public class CatchMeApplication {
 		SpringApplication.run(CatchMeApplication.class, args);
 
 		System.out.println("CATCH ME Project Start!! ---------------------- >>> ");
+		System.out.println("asdfasdf");
 
 	}
 
