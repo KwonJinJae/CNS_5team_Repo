@@ -8,7 +8,8 @@ public class MainController {
 
     @RequestMapping("/")
     public String main (){
-
+        System.out.println("ASdf");
         return "main";
     }
+
 }
