@@ -28,4 +28,41 @@ public class CarboninfoServiceImpl implements CarbonInfoService{
         return carbonInfoMapper.carbonInfoDetail(infoNo);
 
     }
+
+    /* 탄소중립 신규 게시글 등록 */
+    @Override
+    public void carbonInfoInsert(CarbonInfo carbonInfo) {
+
+        carbonInfoMapper.carbonInfoInsert(carbonInfo);
+    }
+
+    /* 탄소중립 수정을 위한 조회 */
+    @Override
+    public AdminCarbonFile carbonInfoModifySelect(int infoNo) {
+
+        return carbonInfoMapper.carbonInfoModifySelect(infoNo);
+    }
+
+    /* 탄소 중립 게시글 수정 */
+    @Override
+    public void carbonInfoModify(CarbonInfo carbonInfo) {
+
+        carbonInfoMapper.carbonInfoModify(carbonInfo);
+    }
+
+    /* 탄소 중립 게시글 삭제 */
+    @Override
+    public int carbonInfoDelete(int infoNo) {
+
+        return carbonInfoMapper.carbonInfoDelete(infoNo);
+    }
+
+    /* 탄소 중립글 조회수 증가 */
+    @Override
+    public int updateCarbonInfoView(int infoNo) {
+
+        return carbonInfoMapper.updateCarbonInfoView(infoNo);
+    }
+
+
 }

@@ -10,7 +10,7 @@
         <result column="info_title" property="infoTitle" />
         <result column="info_date" property="infoDate" />
         <result column="info_view" property="infoView" />
-        <result column="info_content" property="infoContent" />
+        <result column="info_content" jdbcType="CLOB" javaType="java.lang.String" property="infoContent" />
         <result column="info_source" property="infoSource" />
         <result column="admin_no" property="adminNo" />
     </resultMap>
@@ -33,7 +33,7 @@
         <result column="info_title" property="infoTitle" />
         <result column="info_date" property="infoDate" />
         <result column="info_view" property="infoView" />
-        <result column="info_content" property="infoContent" />
+        <result column="info_content" jdbcType="CLOB" javaType="java.lang.String" property="infoContent" />
         <result column="info_source" property="infoSource" />
         <result column="admin_no" property="adminNo" />
         <association column="info_no" property="carbonInfoFileList"
@@ -41,6 +41,13 @@
             <id column="info_no" property="infoNo" />
             <result column="info_file_name" property="infoFileName"/>
             <result column="info_file_path" property="infoFilePath" />
+        </association>
+        <association column="adminNo" property="admin"
+                     javaType="com.lgUCamp.catchMe.DTO.Admin">
+            <id column="admin_no" property="adminNo"/>
+            <result column="admin_job" property="adminJob"/>
+            <result column="adminId" property="adminId"/>
+            <result column="adminPass" property="adminPass"/>
         </association>
 
     </resultMap>
@@ -68,11 +75,60 @@
             , A.ADMIN_NO
             , B.INFO_FILE_NAME
             , B.INFO_FILE_PATH
-<!--            , C.ADMIN_ID-->
-<!--            , C.ADMIN_JOB-->
-        FROM TBL_CARBON_INFO A
-        INNER JOIN TBL_CARBON_INFO_FILE B ON (A.INFO_NO = B.INFO_NO)
-<!--        JOIN TBL_ADMIN C ON (A.ADMIN_NO = C.ADMIN_NO)-->
-       WHERE A.INFO_NO = #{infoNo}
+            , C.ADMIN_ID
+            , C.ADMIN_JOB
+         FROM TBL_CARBON_INFO A
+         LEFT OUTER JOIN TBL_CARBON_INFO_FILE B ON (A.INFO_NO = B.INFO_NO)
+         JOIN TBL_ADMIN C ON (A.ADMIN_NO = C.ADMIN_NO)
+        WHERE A.INFO_NO = #{infoNo}
     </select>
+
+    <select id="carbonInfoModifySelect" resultMap="adminCarbonInfoFile"
+            resultType="com.lgUCamp.catchMe.DTO.AdminCarbonFile">
+        SELECT
+              A.INFO_NO
+            , A.INFO_TITLE
+            , A.INFO_DATE
+            , A.INFO_VIEW
+            , A.INFO_CONTENT
+            , A.INFO_SOURCE
+            , A.ADMIN_NO
+            , B.INFO_FILE_NAME
+            , B.INFO_FILE_PATH
+            , C.ADMIN_ID
+            , C.ADMIN_JOB
+         FROM TBL_CARBON_INFO A
+         LEFT OUTER JOIN TBL_CARBON_INFO_FILE B ON (A.INFO_NO = B.INFO_NO)
+         JOIN TBL_ADMIN C ON (A.ADMIN_NO = C.ADMIN_NO)
+        WHERE A.INFO_NO = #{infoNo}
+    </select>
+
+    <insert id="carbonInfoInsert" parameterType="com.lgUCamp.catchMe.DTO.CarbonInfo">
+        INSERT INTO TBL_CARBON_INFO
+        (
+        INFO_NO, INFO_TITLE, INFO_DATE
+        , INFO_VIEW, INFO_CONTENT, INFO_SOURCE
+        , ADMIN_NO
+        )
+        VALUES
+        (
+        SEQ_TBL_CARBON_INFO.NEXTVAL, #{infoTitle}, DEFAULT
+        , DEFAULT, #{infoContent}, #{infoSource}
+        , #{adminNo}
+        )
+    </insert>
+
+    <update id="carbonInfoModify">
+        UPDATE TBL_CARBON_iNFO
+           SET INFO_TITLE = #{infoTitle},
+               INFO_CONTENT = #{infoContent},
+               INFO_SOURCE = #{infoSource}
+        WHERE INFO_NO = #{infoNo}
+    </update>
+
+    <delete id="carbonInfoDelete">
+        DELETE FROM TBL_CARBON_INFO
+         WHERE INFO_NO = #{infoNo}
+    </delete>
+
 </mapper>

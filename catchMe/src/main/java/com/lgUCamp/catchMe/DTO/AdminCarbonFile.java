@@ -22,7 +22,7 @@ public class AdminCarbonFile {
     private String infoSource;
     private int adminNo;
 
-//    private AdminDTO admin;
+    private Admin admin;
 
     private CarbonInfoFile carbonInfoFileList;
 
