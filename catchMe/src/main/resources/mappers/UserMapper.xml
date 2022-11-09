@@ -5,13 +5,15 @@
 
 <mapper namespace="com.lgUCamp.catchMe.Mapper.UserMapper">
     <select id="getUserInfo" resultType="com.lgUCamp.catchMe.DTO.UserDTO">
-        SELECT user_id, user_pass, user_no, user_name, user_birth, user_mail,
-            user_phone, user_nickname, user_img, user_img_path, user_quiz_sum, join_date,
-            (SELECT authority_name
-                FROM tbl_auth
-                WHERE authority_code = 4) as authority_name
-            FROM tbl_user
-            WHERE USER_ID= #{user_id}
+        SELECT * FROM tbl_user WHERE USER_ID= #{user_id}
+    </select>
+
+    <select id="getUserAuth" resultType="com.lgUCamp.catchMe.DTO.AuthDTO">
+        SELECT *
+        FROM tbl_auth
+        WHERE authority_code IN (SELECT authority_code
+                                FROM tbl_admin_user_auth
+                                WHERE user_no = #{user_no})
     </select>
 
     <insert id="saveUser" parameterType="com.lgUCamp.catchMe.DTO.UserDTO">
