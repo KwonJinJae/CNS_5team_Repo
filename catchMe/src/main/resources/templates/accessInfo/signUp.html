@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="author" content="Dashboard">
   <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-  <title>Dashio - Bootstrap Admin Template</title>
+  <title>CMIC</title>
 
   <!-- Favicons -->
   <link href="/img/favicon.png" rel="icon">
@@ -23,7 +23,7 @@
   <link href="/css/header.css" rel="stylesheet">
   <link href="/css/login.css" rel="stylesheet">
   <!-- <link href="css/findform.css" rel="stylesheet"> -->
-  <link href="/css/register.css" rel="stylesheet">
+  <link href="/css/signup.css" rel="stylesheet">
   <link href="/css/style-responsive.css" rel="stylesheet">
   
   <!-- =======================================================
@@ -41,53 +41,78 @@
       *********************************************************************************************************************************************************** -->
   <div id="login-page">
     <div>
-      <form class="form-login" action="index.html">
+      <form class="form-login" action="/signUp" method="post">
         <h2 class="form-login-heading">sign up now</h2>
-        <div class="login-wrap">
-          <table class="login-inputForm">
-            <tr>
-              <td>아이디</td>
-              <td class="registerForm"><input type="text" class="form-control" placeholder="ID" autofocus></td>
-            </tr>
-            <tr>
-              <td>비밀번호</td>
-              <td class="registerForm"><input type="password" class="form-control" placeholder="Password"></td>
-            </tr>
-            <tr>
-              <td>비밀번호 확인</td>
-              <td class="registerForm"><input type="password" class="form-control" placeholder="Password"></td>
-            </tr>
-            <tr>
-              <td>성함</td>
-              <td class="registerForm"><input type="text" class="form-control" placeholder="Name"></td>
-            </tr>
-            <tr>
-              <td>닉네임</td>
-              <td class="registerForm"><input type="text" class="form-control" placeholder="Nickname"></td>
-            </tr>
-            <tr>
-              <td>생년월일</td>
-              <td class="registerForm"><input type="text" class="form-control" placeholder="Birth"></td>
-            </tr>
-            <tr>
-              <td>이메일</td>
-              <td class="registerForm"><input type="email" class="form-control" placeholder="E-mail"></td>
-            </tr>
-            <tr>
-              <td>휴대전화</td>
-              <td class="registerForm"><input type="text" class="form-control" placeholder="Phone"></td>
-            </tr>
-          </table>
+        <div class="signUp-wrap">
+          <div class="signUp-row">
+            <h5 class="signUp-title"><label for="id">아이디</label></h5>
+            <span class="signUp-box">
+              <input id="id" type="text" class="form-control" placeholder="ID" name="user_id" th:value="${userDTO.user_id}">
+            </span>
+            <div th:if="${#fields.hasErrors('userDTO.user_id')}" class="error-msg" th:errors="*{userDTO.user_id}"></div>
+          </div>
+          <div class="signUp-row">
+            <h5 class="signUp-title"><label for="pass1">비밀번호</label></h5>
+            <span class="signUp-box">
+              <input id="pass1" type="password" class="form-control" placeholder="Password" name="user_pass">
+            </span>
+            <div th:if="${#fields.hasErrors('userDTO.user_pass')}" class="error-msg" th:errors="*{userDTO.user_pass}"></div>
+          </div>
+          <div class="signUp-row">
+            <h5 class="signUp-title"><label for="pass2">비밀번호 확인</label></h5>
+            <span class="signUp-box">
+              <input id="pass2" type="password" class="form-control" placeholder="Password" name="user_pass1">
+            </span>
+          </div>
+          <div class="signUp-row">
+            <h5 class="signUp-title"><label for="name">성함</label></h5>
+            <span class="signUp-box">
+              <input id="name" type="text" class="form-control" placeholder="Name" name="user_name" th:value="${userDTO.user_name}">
+            </span>
+            <div th:if="${#fields.hasErrors('userDTO.user_name')}" class="error-msg" th:errors="*{userDTO.user_name}"></div>
+          </div>
+          <div class="signUp-row">
+            <h5 class="signUp-title"><label for="nickname">닉네임</label></h5>
+            <span class="signUp-box">
+              <input id="nickname" type="text" class="form-control" placeholder="Nickname" name="user_nickname" th:value="${userDTO.user_nickname}">
+            </span>
+            <div th:if="${#fields.hasErrors('userDTO.user_nickname')}" class="error-msg" th:errors="*{userDTO.user_nickname}"></div>
+          </div>
+          <div class="signUp-row">
+            <h5 class="signUp-title"><label for="birth">생년월일</label></h5>
+            <span class="signUp-box">
+              <input id="birth" type="text" class="form-control" placeholder="Birth" maxlength="6" name="user_birth" th:value="${userDTO.user_birth}">
+            </span>
+            <div th:if="${#fields.hasErrors('userDTO.user_birth')}" class="error-msg" th:errors="*{userDTO.user_birth}"></div>
+          </div>
+          <div class="signUp-row">
+            <h5 class="signUp-title"><label for="mail">이메일 <span class="signUp-select-title">(선택)</span></label></h5>
+            <span class="signUp-box">
+              <input id="mail" type="email" class="form-control" placeholder="E-mail" name="user_mail" th:value="${userDTO.user_mail}">
+            </span>
+            <div th:if="${#fields.hasErrors('userDTO.user_mail')}" class="error-msg" th:errors="*{userDTO.user_mail}"></div>
+          </div>
+          <div class="signUp-row">
+            <h5 class="signUp-title"><label for="phone">휴대전화</label></h5>
+            <span class="signUp-box">
+              <input id="phone" type="text" class="form-control" placeholder="Phone" name="user_phone" th:value="${userDTO.user_phone}">
+            </span>
+            <div th:if="${#fields.hasErrors('userDTO.user_phone')}" class="error-msg" th:errors="*{userDTO.user_phone}"></div>
+          </div>
           <div class="login-social-link centered">
             <div class="login-findForm"></div>
           </div>
         </div>
         <div class="buttonForm">
-          <button class="btn btn-theme btn-block registerButton" href="index.html" type="submit"><i class="fa fa-lock"></i>회원가입</button>
+          <button class="btn btn-theme btn-block registerButton" type="submit"><i class="fa fa-lock"></i>회원가입</button>
         </div>
       </form>
     </div>
   </div>
+
+  <footer>
+    1
+  </footer>
   <!-- js placed at the end of the document so the pages load faster -->
   <script src="/lib/jquery/jquery.min.js"></script>
   <script src="/js/bootstrap.min.js"></script>
