@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lgUCamp.catchMe.Challenge.ChallengeMapper">
+
+    <insert id="insertCertify" parameterType="com.lgUCamp.catchMe.Challenge.ChallengeCertify">
+        INSERT INTO TBL_CHALLENGE_PROOF
+        (
+        C_PROOF_NO,C_PROOF_DATE,C_PROOF_TITLE,C_PROOF_CONTENT
+        ,C_PROOF_VIEWS,C_NOTICE_NO,C_PROOF_IMG,USER_NO
+        )
+        VALUES
+        (
+        #{cProofNo}, #{cProofDate}, #{cProofTitle}, #{cProofContent},
+        #{cProofViews, jdbcType=NUMERIC},#{cNoticeNo},#{cProofImg},#{userNo}
+        )
+    </insert>
+
+
+</mapper>
