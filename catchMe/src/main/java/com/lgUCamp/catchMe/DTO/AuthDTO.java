@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AuthDTO {
-    private String authority_code;
-    private String authority_name;
+    private String authorityCode;
+    private String authorityName;
     private String authority;
 }

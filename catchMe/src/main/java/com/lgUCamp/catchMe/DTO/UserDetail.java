@@ -14,15 +14,15 @@ import java.util.Collection;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDetail implements UserDetails {
-    private String user_id;
-    private String user_pass;
-    private ArrayList<String> authority_name;
+    private String userId;
+    private String userPass;
+    private ArrayList<String> authorityName;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         ArrayList<GrantedAuthority> authList = new ArrayList<GrantedAuthority>();
-        for(int i=0; i<authority_name.size(); i++) {
-            authList.add(new SimpleGrantedAuthority(authority_name.get(i)));
+        for(int i=0; i<authorityName.size(); i++) {
+            authList.add(new SimpleGrantedAuthority(authorityName.get(i)));
         }
         System.out.println(authList);
         return authList;
@@ -30,12 +30,12 @@ public class UserDetail implements UserDetails {
 
     @Override
     public String getPassword() {
-        return this.user_pass;
+        return this.userPass;
     }
 
     @Override
     public String getUsername() {
-        return this.user_id;
+        return this.userId;
     }
 
     @Override

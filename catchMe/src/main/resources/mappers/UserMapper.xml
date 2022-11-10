@@ -8,18 +8,36 @@
         SELECT * FROM tbl_user WHERE USER_ID= #{user_id}
     </select>
 
-    <select id="getUserAuth" resultType="com.lgUCamp.catchMe.DTO.AuthDTO">
-        SELECT *
-        FROM tbl_auth
-        WHERE authority_code IN (SELECT authority_code
-                                FROM tbl_admin_user_auth
-                                WHERE user_no = #{user_no})
+    <select id="getAdminInfo" resultType="com.lgUCamp.catchMe.DTO.Admin">
+        SELECT * FROM tbl_admin WHERE admin_id = #{admin_id}
     </select>
 
-    <insert id="saveUser" parameterType="com.lgUCamp.catchMe.DTO.UserDTO">
+    <select id="getUserAuth" resultType="com.lgUCamp.catchMe.DTO.AuthDTO">
+        SELECT *
+          FROM tbl_auth
+          WHERE authority_code IN (SELECT authority_code
+                                     FROM tbl_admin_user_auth
+                                    <where>
+                                        <if test="user_no != 0">
+                                            AND user_no = #{user_no}
+                                        </if>
+                                        <if test="admin_no != 0">
+                                            AND admin_no = #{admin_no}
+                                        </if>
+                                    </where>)
+    </select>
+
+    <insert id="joinUser" parameterType="com.lgUCamp.catchMe.DTO.UserDTO">
+        <selectKey keyProperty="user_no" resultType="int" order="BEFORE">
+            SELECT SEQ_USER_NO.NEXTVAL FROM DUAL
+        </selectKey>
         INSERT
             INTO tbl_user
-                (USER_ID, USER_PASS, USER_NAME, USER_BIRTH, USER_MAIL, USER_PHONE, USER_NICKNAME)
-            VALUES(#{user_id}, #{user_pass}, #{user_name}, #{user_birth}, #{user_mail}, #{user_phone}, #{user_nickname});
+                (USER_NO, USER_ID, USER_PASS, USER_NAME, USER_BIRTH, USER_MAIL, USER_PHONE, USER_NICKNAME)
+            VALUES(#{user_no}, #{user_id}, #{user_pass}, #{user_name}, #{user_birth}, #{user_mail}, #{user_phone}, #{user_nickname})
     </insert>
+
+    <select id="selectAll" resultType="com.lgUCamp.catchMe.DTO.UserDTO">
+        SELECT * FROM tbl_user
+    </select>
 </mapper>

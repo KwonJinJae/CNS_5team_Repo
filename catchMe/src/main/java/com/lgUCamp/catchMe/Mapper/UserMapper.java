@@ -4,6 +4,7 @@ import com.lgUCamp.catchMe.DTO.Admin;
 import com.lgUCamp.catchMe.DTO.AuthDTO;
 import com.lgUCamp.catchMe.DTO.UserDTO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.ArrayList;
 
@@ -15,7 +16,7 @@ public interface UserMapper {
 
     Admin getAdminInfo(String adminId);
 
-    ArrayList<AuthDTO> getUserAuth(int userNo, int adminNo);
+    ArrayList<AuthDTO> getUserAuth(int user_no, int admin_no);
 
     void joinUser(UserDTO userDTO);
 }
