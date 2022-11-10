@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
+  <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
   <!-- summnerNote -->
   <!--  jQuery, bootstrap -->
   <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
@@ -49,7 +50,7 @@
 </head>
 <body>
   <div id="infoOne">
-    <form action="/carbonInfo/carbonInfoModifySelect/run" method="post">
+    <form id="carbonInfoMody" action="/carbonInfo/carbonInfoModifySelect/run" method="post">
       <table class="infoTable">
         <thead>
         <tr>
@@ -77,22 +78,63 @@
           <td colspan="4">
             <textarea class="summernote" name="infoContent"
                                          th:value="${carbonInfo.infoContent}"
-                                         th:utext="${carbonInfo.infoContent}"></textarea>
-            <input type="hidden" name="infoNo" th:value="${carbonInfo.infoNo}" >
+                                         th:utext="${carbonInfo.infoContent}">
+
+            </textarea>
           </td>
         </tr>
         <tr>
           <th width="100" height="35" style="text-align: center;">첨부파일</th>
-          <td colspan="3"> <input type="file" name=""> </td>
+          <td colspan="3">
+                    <th:block th:if="${carbonInfo.carbonInfoFileList.infoFileName}">
+
+                      <a th:href="@{'/'+${carbonInfo.carbonInfoFileList.infoFileName}}">
+                        [[${carbonInfo.carbonInfoFileList.infoFileName}]]</a>
+                      <a th:href="@{'/deleteFile/' + ${carbonInfo.infoNo} }"> x </a>
+
+                    </th:block>
+                    <input th:unless="${carbonInfo.carbonInfoFileList.infoFileName}" name="file" type="file">
+          </td>
         </tr>
         </tbody>
-
       </table>
-      <button type="submit" >수정</button>
+      <input type="hidden" name="infoNo" th:value="${carbonInfo.infoNo}" >
+      <button id="infoModifyRun" type="submit" >수정</button>
     </form>
   </div>
+  <div id="fileDeleteDiv" style="display:none">
+    <input id="deleteFileName" th:value="${carbonInfo.carbonInfoFileList.infoFileName}">
+    <input id="fileDeleteInfoNo" th:value="${carbonInfo.infoNo}">
+  </div>
+
 
   <script>
+
+<!--  const fileName = $("#deleteFileName").val()-->
+<!--  const fileDeleteInfoNo = #("#fileDeleteInfoNo").val()-->
+
+<!--&lt;!&ndash;  파일 삭제 Ajax&ndash;&gt;-->
+<!--  $("#deleteFile").click(function(){-->
+<!--    url : '/deleteFile' + fileDeleteInfoNo,-->
+<!--    data : {fileName : fileName}-->
+<!--    dataType : 'text',-->
+<!--    type : 'POST',-->
+<!--    success : function(result) {-->
+<!--      alert(result);-->
+<!--    }-->
+<!--  })-->
+
+  $("#infoModifyRun").click(function(){
+
+  		if(confirm("해당 게시글을 수정 하시겠습니까?") == true){
+
+            $("#carbonInfoMody").submit();
+
+			}else{
+				return false;
+			}
+        });
+
   $('.summernote').summernote({
         height: 150,
         lang: "ko-KR"

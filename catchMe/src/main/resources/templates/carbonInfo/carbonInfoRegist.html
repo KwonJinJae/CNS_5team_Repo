@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
+  <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
   <!-- summnerNote -->
   <!--  jQuery, bootstrap -->
   <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
@@ -49,13 +50,13 @@
 </head>
 <body>
   <div id="infoOne">
-    <form action="/carbonInfo/carbonInfoRegist/run" method="post">
+    <form action="/carbonInfo/carbonInfoRegist/run" method="post" enctype="multipart/form-data">
       <table class="infoTable">
         <thead>
         <tr>
           <th width="100" height="35" style="text-align: center;">제목</th>
           <td colspan="3" height="35" ><input id="title_ip" type="text" name="infoTitle" maxlength="30"
-                    placeholder="제목을 입력해주세요."></td>
+                    placeholder="제목을 입력해주세요." required></td>
         </tr>
         <tr>
           <th width="100" height="35" style="text-align: center;">작성일</th>
@@ -79,12 +80,8 @@
         </tr>
         <tr>
           <th width="100" height="35" style="text-align: center;">첨부파일</th>
-          <td colspan="3"> <input type="file" name=""> </td>
-        </tr>
-        <tr>
-          <td style="align:center">
-            <input type="submit" value="등록" >
-          </td>
+          <td colspan="3"> <input type="file" name="file"> </td>
+<!--          accept="image/png, image/jpeg 확장자 제한-->
         </tr>
         </tbody>
 

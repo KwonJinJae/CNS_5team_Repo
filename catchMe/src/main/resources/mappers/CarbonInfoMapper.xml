@@ -16,7 +16,7 @@
     </resultMap>
 
     <resultMap id="carbonInfoFile" type="com.lgUCamp.catchMe.DTO.CarbonInfoFile">
-        <id column="info_no" property="infoNo"/>
+        <result column="info_no" property="infoNo"/>
         <result column="info_file_name" property="infoFileName"/>
         <result column="info_file_path" property="infoFilePath"/>
     </resultMap>
@@ -38,7 +38,7 @@
         <result column="admin_no" property="adminNo" />
         <association column="info_no" property="carbonInfoFileList"
                      javaType="com.lgUCamp.catchMe.DTO.CarbonInfoFile">
-            <id column="info_no" property="infoNo" />
+            <result column="info_no" property="infoNo" />
             <result column="info_file_name" property="infoFileName"/>
             <result column="info_file_path" property="infoFilePath" />
         </association>
@@ -52,16 +52,16 @@
 
     </resultMap>
 
-    <select id="carbonInfoList" resultType="com.lgUCamp.catchMe.DTO.CarbonInfo"
-                                resultMap="carbonInfo">
-        SELECT
-               INFO_NO
-             , INFO_TITLE
-             , INFO_DATE
-             , INFO_VIEW
-          FROM TBL_CARBON_INFO
-         ORDER BY INFO_DATE DESC
-    </select>
+<!--    <select id="carbonInfoList" resultType="com.lgUCamp.catchMe.DTO.CarbonInfo"-->
+<!--                                resultMap="carbonInfo">-->
+<!--        SELECT-->
+<!--               INFO_NO-->
+<!--             , INFO_TITLE-->
+<!--             , INFO_DATE-->
+<!--             , INFO_VIEW-->
+<!--          FROM TBL_CARBON_INFO-->
+<!--         ORDER BY INFO_NO DESC-->
+<!--    </select>-->
 
     <select id="carbonInfoDetail" resultMap="adminCarbonInfoFile"
             resultType="com.lgUCamp.catchMe.DTO.AdminCarbonFile">
@@ -130,5 +130,82 @@
         DELETE FROM TBL_CARBON_INFO
          WHERE INFO_NO = #{infoNo}
     </delete>
+
+    <delete id="carbonInfoFileDelete">
+        DELETE FROM TBL_CARBON_INFO_FILE
+        WHERE INFO_NO = #{infoNo}
+    </delete>
+
+    <insert id="carbonInfoFileInsert">
+        INSERT INTO TBL_CARBON_INFO_FILE
+        (
+          INFO_NO, INFO_FILE_NAME, INFO_FILE_PATH
+        )
+        VALUES
+        (
+          #{infoNo}, #{infoFileName}, #{infoFilePath}
+        )
+    </insert>
+
+    <select id="carbonInfoNoSelect" resultType="int">
+        SELECT
+               INFO_NO
+          FROM TBL_CARBON_INFO
+         WHERE ROWNUM = 1
+         ORDER BY INFO_NO DESC
+    </select>
+
+    <select id="carbonInfoList" resultMap="carbonInfo"
+            resultType="com.lgUCamp.catchMe.DTO.CarbonInfo"
+            parameterType="com.lgUCamp.catchMe.Controller.CarbonInfoPaging.SelectCriteria">
+
+        SELECT
+              A.RNUM
+            , A.INFO_NO
+            , A.INFO_TITLE
+            , A.INFO_DATE
+            , A.INFO_VIEW
+            , A.INFO_CONTENT
+            , A.ADMIN_NO
+        FROM (SELECT  ROWNUM RNUM
+                    , B.INFO_NO
+                    , B.INFO_TITLE
+                    , B.INFO_DATE
+                    , B.INFO_VIEW
+                    , B.INFO_CONTENT
+                    , B.ADMIN_NO
+                 FROM (SELECT
+                              C.INFO_NO
+                            , C.INFO_TITLE
+                            , C.INFO_DATE
+                            , C.INFO_VIEW
+                            , C.INFO_CONTENT
+                            , C.ADMIN_NO
+                         FROM TBL_CARBON_INFO C
+                        <where>
+                            <if test="searchCondition == 'all'">
+                                   C.INFO_TITLE LIKE '%' || #{ searchValue } || '%'
+                                OR C.INFO_CONTENT LIKE '%' || #{ searchValue } || '%'
+                            </if>
+                            <if test="searchCondition == 'infoTitle'">
+                                    C.INFO_TITLE LIKE '%' || #{ searchValue } || '%'
+                            </if>
+                            <if test="searchCondition == 'infoContent'">
+                                    C.INFO_CONTENT LIKE '%' || #{ searchValue } || '%'
+                            </if>
+                        </where>
+                            ORDER BY C.INFO_NO DESC
+                         )B
+                <![CDATA[
+                        WHERE ROWNUM <= #{ endRow }
+                      ]]>
+                    )A
+                    WHERE A.RNUM >= #{ startRow }
+    </select>
+
+    <select id="carbonInfoCount" resultType="int" parameterType="java.util.HashMap">
+        SELECT COUNT(*)
+          FROM TBL_CARBON_INFO
+    </select>
 
 </mapper>

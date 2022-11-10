@@ -1,13 +1,17 @@
 package com.lgUCamp.catchMe.Service;
 
+import com.lgUCamp.catchMe.Controller.CarbonInfoPaging.SelectCriteria;
 import com.lgUCamp.catchMe.DTO.AdminCarbonFile;
 import com.lgUCamp.catchMe.DTO.CarbonInfo;
 
+import com.lgUCamp.catchMe.DTO.CarbonInfoFile;
 import com.lgUCamp.catchMe.Mapper.CarbonInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 @Service
 public class CarboninfoServiceImpl implements CarbonInfoService{
@@ -16,9 +20,15 @@ public class CarboninfoServiceImpl implements CarbonInfoService{
     CarbonInfoMapper carbonInfoMapper;
 
     /* 탄소중립 전체 게시글 조회 - 최신 날짜순 정렬 */
-    public ArrayList<CarbonInfo> carbonInfoList(){
+    public ArrayList<CarbonInfo> carbonInfoList(SelectCriteria selectCriteria){
 
-        return carbonInfoMapper.carbonInfoList();
+            return carbonInfoMapper.carbonInfoList(selectCriteria);
+    }
+
+    /* 총 게시물 수 조회 */
+    @Override
+    public int carbonInfoCount(Map<String, String> searchMap) {
+        return carbonInfoMapper.carbonInfoCount(searchMap);
     }
 
     /* 탄소중립 상세 게시글 조회 */
@@ -45,9 +55,9 @@ public class CarboninfoServiceImpl implements CarbonInfoService{
 
     /* 탄소 중립 게시글 수정 */
     @Override
-    public void carbonInfoModify(CarbonInfo carbonInfo) {
+    public int carbonInfoModify(CarbonInfo carbonInfo) {
 
-        carbonInfoMapper.carbonInfoModify(carbonInfo);
+        return carbonInfoMapper.carbonInfoModify(carbonInfo);
     }
 
     /* 탄소 중립 게시글 삭제 */
@@ -62,6 +72,25 @@ public class CarboninfoServiceImpl implements CarbonInfoService{
     public int updateCarbonInfoView(int infoNo) {
 
         return carbonInfoMapper.updateCarbonInfoView(infoNo);
+    }
+
+    /* 파일 저장을 위해 해당 게시글 번호를 불러온다. */
+    @Override
+    public int carbonInfoNoSelect() {
+        return carbonInfoMapper.carbonInfoNoSelect();
+    }
+
+    /* 파일 저장 */
+    @Override
+    public void carbonInfoFileInsert(CarbonInfoFile carbonInfoFile) {
+
+        carbonInfoMapper.carbonInfoFileInsert(carbonInfoFile);
+    }
+
+    /* 정보글 삭제 시 파일도 삭제 */
+    @Override
+    public int carbonInfoFileDelete(int infoNo) {
+        return carbonInfoMapper.carbonInfoFileDelete(infoNo);
     }
 
 
