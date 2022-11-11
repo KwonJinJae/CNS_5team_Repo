@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>CMIC</title>
+
+    <style>
+        #ranking{
+            margin : 0 auto;
+            text-align : center;
+            border : 1px solid  #D9D9D9;
+        }
+        #ranking td{
+            width : 150px;
+        }
+        .rankingCateName {
+            border : 2;
+        }
+        #quizFormTable{
+            font-size : 1.5em;
+            margin : 0 auto;
+            width : 620px;
+            border : 1px solid  #D9D9D9;
+        }
+        #quizFormTable td{
+            background-color : ;
+        }
+    </style>
+</head>
+<body>
+  <table id="ranking" >
+      <thead>
+        <th colspan="4">
+            <h2>누적 랭킹</h2>
+        </th>
+      </thead>
+    <tr>
+        <td th:each="quiz : ${quizList}">
+            <p class="rankingCateName" th:text="${quiz.quizCate.quizCateName}"> </p>
+            <p th:text="|${quiz.user.userId} 님|"></p>
+            <p th:text="|${quiz.quizScore} 점|"></p>
+        </td>
+    </tr>
+  </table>
+  <table id="quizFormTable">
+      <thead>
+        <td colspan="4"><h3>친환경 퀴즈</h3></td>
+      </thead>
+      <tbody>
+        <tr th:each="quiz : ${quizList}">
+            <td>
+                <form name="waitingForm" th:action="|/quiz/quizSolve?searchCondition=${quiz.quizCateNo}|" method="post">
+<!--                <form name="waitingForm" action="/quiz/quizRun" method="post">-->
+                    <button th:id="${quiz.quizCateNo}" type="submit">
+                        [[${quiz.quizCate.quizCateName}]]
+                    </button>
+                    <input type="hidden" name="page" value="0">
+                    <input name="quizCateNo" type="text" th:value="${quiz.quizCateNo}">
+                </form>
+            </td>
+        </tr>
+      </tbody>
+  </table>
+</body>
+</html>

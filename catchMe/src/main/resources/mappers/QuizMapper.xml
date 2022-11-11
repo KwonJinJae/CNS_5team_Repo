@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lgUCamp.catchMe.Mapper.QuizMapper">
+
+    <resultMap id="quizMap" type="com.lgUCamp.catchMe.DTO.Quiz.Quiz">
+        <id column="quiz_no" property="quizNo"/>
+        <result column="quiz_content" property="quizContent" />
+        <result column="quiz_reason" property="quizReason" />
+        <result column="quiz_answer" property="quizAnswer" />
+        <result column="admin_no" property="adminNo" />
+        <result column="quiz_cate_no" property="quizCateNo" />
+    </resultMap>
+
+    <resultMap id="quizCateMap" type="com.lgUCamp.catchMe.DTO.Quiz.QuizCateDTO">
+        <id column="quiz_cate_no" property="quizCateNo"/>
+        <result column="quiz_cate_name" property="quizCateName"/>
+    </resultMap>
+
+    <resultMap id="quizScoreMap" type="com.lgUCamp.catchMe.DTO.Quiz.QuizScoreDTO">
+        <id column="quiz_score_num" property="quizScoreNum"/>
+        <result column="quiz_score" property="quizScore"/>
+        <result column="quiz_score_time" property="quizScoreTime"/>
+        <result column="user_no" property="userNo"/>
+        <result column="quiz_cate_no" property="quizCateNo"/>
+    </resultMap>
+
+    <resultMap id="userMap" type="com.lgUCamp.catchMe.DTO.UserDTO">
+        <id column="user_no" property="userNo"/>
+        <result column="user_name" property="userName" />
+        <result column="user_birth" property="userBirth" />
+        <result column="user_mail" property="userMail" />
+        <result column="user_phone" property="userPhone" />
+        <result column="user_nickname" property="userNickname" />
+        <result column="user_id" property="userId" />
+        <result column="user_pass" property="userPass" />
+        <result column="join_date" property="joinDate" />
+        <result column="user_img" property="userImg" />
+        <result column="user_img_path" property="userImgPath" />
+    </resultMap>
+
+    <resultMap id="userQuizScore" type="com.lgUCamp.catchMe.DTO.Quiz.UserQuizScoreDTO">
+        <id column="quiz_score_num" property="quizScoreNum"/>
+        <result column="quiz_score" property="quizScore"/>
+        <result column="quiz_score_time" property="quizScoreTime"/>
+        <result column="user_no" property="userNo"/>
+        <result column="quiz_cate_no" property="quizCateNo"/>
+        <association column="user_no" property="user"
+                     javaType="com.lgUCamp.catchMe.DTO.UserDTO">
+            <id column="user_no" property="userNo"/>
+            <result column="user_name" property="userName" />
+            <result column="user_birth" property="userBirth" />
+            <result column="user_mail" property="userMail" />
+            <result column="user_phone" property="userPhone" />
+            <result column="user_nickname" property="userNickname" />
+            <result column="user_id" property="userId" />
+            <result column="user_pass" property="userPass" />
+            <result column="join_date" property="joinDate" />
+            <result column="user_img" property="userImg" />
+            <result column="user_img_path" property="userImgPath" />
+        </association>
+        <association column="quizCateNo" property="quizCate"
+                     javaType="com.lgUCamp.catchMe.DTO.Quiz.QuizCateDTO">
+            <id column="quiz_cate_no" property="quizCateNo"/>
+            <result column="quiz_cate_name" property="quizCateName"/>
+        </association>
+    </resultMap>
+
+    <select id="userQuizScoreCateOne" resultMap="userQuizScore"
+            resultType="com.lgUCamp.catchMe.DTO.Quiz.UserQuizScoreDTO">
+        SELECT
+              ROWNUM
+            , A.QUIZ_SCORE_NUM
+            , A.QUIZ_SCORE
+            , A.USER_NO
+            , A.QUIZ_CATE_NO
+            , B.QUIZ_CATE_NAME
+            , C.USER_ID
+        FROM TBL_QUIZ_SCORE A
+        JOIN TBL_QUIZ_CATE B ON (A.QUIZ_CATE_NO = B.QUIZ_CATE_NO)
+        JOIN TBL_USER C ON (A.USER_NO = C.USER_NO)
+        WHERE A.QUIZ_SCORE = (
+                                SELECT
+                                      MAX(QUIZ_SCORE)
+                                 FROM TBL_QUIZ_SCORE
+                                WHERE QUIZ_CATE_NO = 1
+        )
+        AND A.QUIZ_CATE_NO = 1
+    </select>
+
+    <select id="userQuizScoreCateTwo" resultMap="userQuizScore"
+                    resultType="com.lgUCamp.catchMe.DTO.Quiz.UserQuizScoreDTO">
+        SELECT
+              ROWNUM
+            , A.QUIZ_SCORE_NUM
+            , A.QUIZ_SCORE
+            , A.USER_NO
+            , A.QUIZ_CATE_NO
+            , B.QUIZ_CATE_NAME
+            , C.USER_ID
+        FROM TBL_QUIZ_SCORE A
+        JOIN TBL_QUIZ_CATE B ON (A.QUIZ_CATE_NO = B.QUIZ_CATE_NO)
+        JOIN TBL_USER C ON (A.USER_NO = C.USER_NO)
+        WHERE A.QUIZ_SCORE = (
+                             SELECT
+                                     MAX(QUIZ_SCORE)
+                               FROM TBL_QUIZ_SCORE
+                              WHERE QUIZ_CATE_NO = 2
+                            )
+        AND A.QUIZ_CATE_NO = 2
+    </select>
+
+    <select id="userQuizScoreCateThree" resultMap="userQuizScore"
+            resultType="com.lgUCamp.catchMe.DTO.Quiz.UserQuizScoreDTO">
+        SELECT
+              ROWNUM
+            , A.QUIZ_SCORE_NUM
+            , A.QUIZ_SCORE
+            , A.USER_NO
+            , A.QUIZ_CATE_NO
+            , B.QUIZ_CATE_NAME
+            , C.USER_ID
+        FROM TBL_QUIZ_SCORE A
+        JOIN TBL_QUIZ_CATE B ON (A.QUIZ_CATE_NO = B.QUIZ_CATE_NO)
+        JOIN TBL_USER C ON (A.USER_NO = C.USER_NO)
+        WHERE A.QUIZ_SCORE = (
+                                SELECT
+                                MAX(QUIZ_SCORE)
+                                FROM TBL_QUIZ_SCORE
+                               WHERE QUIZ_CATE_NO = 3
+                                )
+        AND A.QUIZ_CATE_NO = 3
+    </select>
+
+    <select id="userQuizScoreCateFour" resultMap="userQuizScore"
+            resultType="com.lgUCamp.catchMe.DTO.Quiz.UserQuizScoreDTO">
+        SELECT
+              ROWNUM
+            , A.QUIZ_SCORE_NUM
+            , A.QUIZ_SCORE
+            , A.USER_NO
+            , A.QUIZ_CATE_NO
+            , B.QUIZ_CATE_NAME
+            , C.USER_ID
+        FROM TBL_QUIZ_SCORE A
+        JOIN TBL_QUIZ_CATE B ON (A.QUIZ_CATE_NO = B.QUIZ_CATE_NO)
+        JOIN TBL_USER C ON (A.USER_NO = C.USER_NO)
+        WHERE A.QUIZ_SCORE = (
+                                SELECT
+                                MAX(QUIZ_SCORE)
+                                FROM TBL_QUIZ_SCORE
+                               WHERE QUIZ_CATE_NO = 4
+                             )
+        AND A.QUIZ_CATE_NO = 4
+    </select>
+
+<!--    <select id="selectQuizList" resultType="com.lgUCamp.catchMe.DTO.Quiz.Quiz"-->
+<!--                                parameterType="int" resultMap="quizMap">-->
+<!--        SELECT-->
+<!--              QUIZ_NO-->
+<!--            , QUIZ_CONTENT-->
+<!--            , QUIZ_REASON-->
+<!--            , QUIZ_ANSWER-->
+<!--            , ADMIN_NO-->
+<!--            , QUIZ_CATE_NO-->
+<!--        FROM TBL_QUIZ-->
+<!--        WHERE QUIZ_CATE_NO = #{quizCateNo}-->
+<!--    </select>-->
+
+    <select id="selectQuizList" resultMap="quizMap" parameterType="com.lgUCamp.catchMe.Controller.CarbonInfoPaging.SelectCriteria"
+                                resultType="com.lgUCamp.catchMe.DTO.Quiz.Quiz">
+        SELECT
+              A.RNUM
+            , A.QUIZ_NO
+            , A.QUIZ_CONTENT
+            , A.QUIZ_REASON
+            , A.QUIZ_ANSWER
+            , A.ADMIN_NO
+            , A.QUIZ_CATE_NO
+         FROM (
+                SELECT ROWNUM RNUM
+                     , B.QUIZ_NO
+                     , B.QUIZ_CONTENT
+                     , B.QUIZ_REASON
+                     , B.QUIZ_ANSWER
+                     , B.ADMIN_NO
+                     , B.QUIZ_CATE_NO
+                FROM (
+                      SELECT
+                             QUIZ_NO
+                           , QUIZ_CONTENT
+                           , QUIZ_REASON
+                           , QUIZ_ANSWER
+                           , ADMIN_NO
+                           , QUIZ_CATE_NO
+                        FROM TBL_QUIZ
+                       WHERE QUIZ_CATE_NO = #{ searchCondition }
+                       ORDER BY DBMS_RANDOM.VALUE
+                      ) B
+        <![CDATA[
+               WHERE ROWNUM <=  #{ endRow }
+              ]]>
+             ) A
+         WHERE A.RNUM >=  #{ startRow }
+    </select>
+
+    <select id="quizCateListCount" parameterType="int" resultType="integer" resultMap="quizMap">
+        SELECT
+               COUNT(*)
+          FROM (
+                SELECT ROWNUM
+                     , B.QUIZ_NO
+                     , B.QUIZ_CONTENT
+                     , B.QUIZ_REASON
+                     , B.QUIZ_ANSWER
+                     , B.ADMIN_NO
+                     , B.QUIZ_CATE_NO
+                FROM (
+                       SELECT
+                              QUIZ_NO
+                            , QUIZ_CONTENT
+                            , QUIZ_REASON
+                            , QUIZ_ANSWER
+                            , ADMIN_NO
+                            , QUIZ_CATE_NO
+                         FROM TBL_QUIZ
+                        WHERE QUIZ_CATE_NO = #{ quizCateNo }
+                        ORDER BY DBMS_RANDOM.VALUE
+                        ) B
+            <![CDATA[
+                    WHERE ROWNUM <= 10
+                    ]]>
+                    )
+    </select>
+</mapper>

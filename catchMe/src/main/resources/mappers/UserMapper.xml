@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lgUCamp.catchMe.Mapper.UserMapper">
+    <select id="getUserInfo" resultType="com.lgUCamp.catchMe.DTO.UserDTO">
+        SELECT * FROM tbl_user WHERE USER_ID= #{user_id}
+    </select>
+
+    <select id="getAdminInfo" resultType="com.lgUCamp.catchMe.DTO.AdminDTO">
+        SELECT * FROM tbl_admin WHERE admin_id = #{admin_id}
+    </select>
+
+    <select id="getUserAuth" resultType="com.lgUCamp.catchMe.DTO.AuthDTO">
+        SELECT *
+          FROM tbl_auth
+          WHERE authority_code IN (SELECT authority_code
+                                     FROM tbl_admin_user_auth
+                                    <where>
+                                        <if test="user_no != 0">
+                                            AND user_no = #{user_no}
+                                        </if>
+                                        <if test="admin_no != 0">
+                                            AND admin_no = #{admin_no}
+                                        </if>
+                                    </where>)
+    </select>
+
+    <insert id="joinUser" parameterType="com.lgUCamp.catchMe.DTO.UserDTO">
+        <selectKey keyProperty="userNo" resultType="int" order="BEFORE">
+            SELECT SEQ_USER_NO.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT
+            INTO tbl_user
+                ( USER_NO, USER_ID, USER_PASS, USER_NAME,
+                  USER_BIRTH, USER_MAIL, USER_PHONE, USER_NICKNAME )
+            VALUES
+                ( #{userNo}, #{userId}, #{userPass}, #{userName},
+                  #{userBirth}, #{userMail}, #{userPhone}, #{userNickname} )
+    </insert>
+
+    <select id="selectAll" resultType="com.lgUCamp.catchMe.DTO.UserDTO">
+        SELECT * FROM tbl_user
+    </select>
+</mapper>

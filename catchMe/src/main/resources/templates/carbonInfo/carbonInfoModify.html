@@ -2,6 +2,16 @@
 <html lang="en" xmlns:th="www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
+  <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+  <!--    Google Fonts-->
+  <!-- <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'> -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500&display=swap" rel="stylesheet">
+  <!-- Bootstrap -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  <!--Main Stylesheet-->
+  <link href="css/style.css" rel="stylesheet">
+
   <!-- summnerNote -->
   <!--  jQuery, bootstrap -->
   <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
@@ -48,8 +58,73 @@
     </style>
 </head>
 <body>
+<!--Start Hedaer Section-->
+<section id="header">
+  <div class="header-area">
+    <div class="top_header">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 zero_mp">
+            <div class="address">
+            </div>
+          </div>
+          <!--End of col-md-4-->
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 zero_mp">
+            <div class="phone">
+            </div>
+          </div>
+          <!--End of col-md-4-->
+          <div class="col-md-4">
+            <div class="social_icon text-right">
+              <button>login</button>
+            </div>
+          </div>
+          <!--End of col-md-4-->
+        </div>
+        <!--End of row-->
+      </div>
+      <!--End of container-->
+    </div>
+    <!--End of top header-->
+    <div class="header_menu text-center" data-spy="affix" data-offset-top="50" id="nav">
+      <div class="container">
+        <nav class="navbar navbar-default zero_mp ">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand custom_navbar-brand" href="#"><img src="img/logo.png" alt=""></a>
+          </div>
+          <!--End of navbar-header-->
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse zero_mp" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right main_menu">
+              <li class="active"><a href="#header"> <span class="sr-only">(current)</span></a></li>
+              <li><a href="#testimonial">환경퀴즈</a></li>
+              <li><a href="#blog">챌린지</a></li>
+              <li><a href="#contact">환경정보</a></li>
+            </ul>
+          </div>
+          <!-- /.navbar-collapse -->
+        </nav>
+        <!--End of nav-->
+      </div>
+      <!--End of container-->
+    </div>
+    <!--End of header menu-->
+  </div>
+  <!--end of header area-->
+</section>
+<!--End of Hedaer Section-->
+
+
   <div id="infoOne">
-    <form action="/carbonInfo/carbonInfoModifySelect/run" method="post">
+    <form id="carbonInfoMody" action="/carbonInfo/carbonInfoModifySelect/run" method="post">
       <table class="infoTable">
         <thead>
         <tr>
@@ -77,22 +152,66 @@
           <td colspan="4">
             <textarea class="summernote" name="infoContent"
                                          th:value="${carbonInfo.infoContent}"
-                                         th:utext="${carbonInfo.infoContent}"></textarea>
-            <input type="hidden" name="infoNo" th:value="${carbonInfo.infoNo}" >
+                                         th:utext="${carbonInfo.infoContent}">
+
+            </textarea>
           </td>
         </tr>
         <tr>
           <th width="100" height="35" style="text-align: center;">첨부파일</th>
-          <td colspan="3"> <input type="file" name=""> </td>
+          <td colspan="3">
+                    <th:block th:if="${carbonInfo.carbonInfoFileList.infoFileName}">
+
+                      <a id="uploadFile" th:href="@{'/'+${carbonInfo.carbonInfoFileList.infoFileName}}">
+                        [[${carbonInfo.carbonInfoFileList.infoFileName}]]</a>
+                      <button type="button" id="deleteX" >x</button>
+
+                      <input type="hidden" name="infoFileName" value="${carbonInfo.carbonInfoFileList.infoFileName}">
+                      <input type="hidden" name="infoFileName" value="${carbonInfo.carbonInfoFileList.infoFilePath}">
+
+                    </th:block>
+                    <input style="display:none" id="uploadingFile" name="file" type="file">
+          </td>
         </tr>
         </tbody>
-
       </table>
-      <button type="submit" >수정</button>
+      <input type="hidden" name="infoNo" th:value="${carbonInfo.infoNo}" >
+      <input type="hidden" id="status2" value="modi">
+      <input type="hidden" name="status" value="modify">
+
+      <button id="infoModifyRun" type="submit" >수정</button>
     </form>
   </div>
+  <div id="fileDeleteDiv" style="display:none">
+    <input id="deleteFileName" th:value="${carbonInfo.carbonInfoFileList.infoFileName}">
+    <input id="fileDeleteInfoNo" th:value="${carbonInfo.infoNo}">
+  </div>
+
 
   <script>
+
+  $("#deleteX").click(function(){
+    $("#status").val('delete');
+    $("#uploadFile").hide();
+    $("#deleteX").hide();
+    $("#uploadingFile").show();
+  })
+
+  $("#uploadingFile").click(function(){
+    $("#status2").val('uploading');
+  })
+
+  $("#infoModifyRun").click(function(){
+
+  		if(confirm("해당 게시글을 수정 하시겠습니까?") == true){
+
+            $("#carbonInfoMody").submit();
+
+			}else{
+				return false;
+			}
+        });
+
   $('.summernote').summernote({
         height: 150,
         lang: "ko-KR"

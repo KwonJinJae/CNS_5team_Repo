@@ -5,9 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.sql.Date;
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,9 +19,9 @@ public class AdminCarbonFile {
     private String infoSource;
     private int adminNo;
 
-    private Admin admin;
+    private AdminDTO admin;
 
-    private CarbonInfoFile carbonInfoFileList;
+    private CarbonInfoFileDTO carbonInfoFileList;
 
 
 }

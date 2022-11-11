@@ -35,7 +35,7 @@
 </head>
 <body>
     <div id="infoOne">
-        <form th:action="|/carbonInfo/carbonInfoModifySelect/${carbonInfo.infoNo}|" method="post">
+        <form id="carbonInfoForm" th:action="|/carbonInfo/carbonInfoDelete/${carbonInfo.infoNo}|" method="post">
             <table class="infoTable">
                 <thead>
                 <tr>
@@ -71,8 +71,8 @@
                 <tr>
                     <th width="100" height="35" style="text-align: center;">첨부파일</th>
                     <td colspan="3"> <a th:if="${carbonInfo.carbonInfoFileList.infoFileName}"
-                                        th:href="@{/carbonInfo.carbonInfoFileList.infoFilePath/}
-                                                 + ${carbonInfo.carbonInfoFileList.infoFileName}"></a> [[${carbonInfo.carbonInfoFileList.infoFileName}]]</td>
+                                        th:href="@{'/'+${carbonInfo.carbonInfoFileList.infoFileName}}">
+                                        [[${carbonInfo.carbonInfoFileList.infoFileName}]]</a> </td>
                 </tr>
                 </tbody>
             </table>
@@ -85,33 +85,45 @@
                 <input name="infoContent" th:value="${carbonInfo.infoContent}">
                 <input name="infoSource" th:value="${carbonInfo.infoSource}">
                 <input name="admin.adminJob" th:value="${carbonInfo.admin.adminJob}">
+                <input name="infoFileName" th:value="${carbonInfo.carbonInfoFileList.infoFileName}">
+                <input name="infoFilePath" th:value="${carbonInfo.carbonInfoFileList.infoFilePath}">
 
                 로그인 되면 session.adminId 로 받아서 저장
                 <input name="carbonInfoFileList.infoFileName" th:value="${carbonInfo.carbonInfoFileList.infoFileName}">
                 <input name="carbonInfoFileList.infoFilePath" th:value="${carbonInfo.carbonInfoFileList.infoFilePath}">
 
             </div>
-            <div id="infoOne_btn">
-                <input id="deleteCarbonInfo" type="button" value="삭제"> <button >목록으로</button>
-                <button type="submit">수정</button>
-            </div>
+
+                <input id="deleteCarbonInfo" type="button" value="삭제">
+                <button onclick="location.href='carbonInfo/carbonInfoList'">목록으로</button>
+            <button id="modifyCarbonInfo" type="button" >수정</button>
+
         </form>
+
+
     </div>
 
     <script>
         const infoNo = $("#infoNoVal").val();
 
-<!--        탄소정보글 삭제    -->
+        $("#modifyCarbonInfo").click(function(){
+
+            location.href="/carbonInfo/carbonInfoModifySelect/" + infoNo
+
+        });
+
+<!--        탄소정보글 삭제-->
       $("#deleteCarbonInfo").click(function(){
 
-  		if(confirm("해당 게시글을 하시겠습니까?") == true){
+  		if(confirm("해당 게시글을 삭제 하시겠습니까?") == true){
 
-  			location.href="/carbonInfo/carbonInfoDelete/" + infoNo
+            $("#carbonInfoForm").submit();
 
 			}else{
 				return false;
 			}
         });
+
     </script>
 </body>
 </html>

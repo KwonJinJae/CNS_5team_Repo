@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="Dashboard">
+  <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+  <title>CMIC</title>
+
+  <!-- Favicons -->
+  <link href="/img/favicon.png" rel="icon">
+  <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Bootstrap core CSS -->
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <!--external css-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap"rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="/css/header.css" rel="stylesheet">
+  <link href="/css/login.css" rel="stylesheet">
+  <link href="/css/findform.css" rel="stylesheet">
+  <link href="/css/style-responsive.css" rel="stylesheet">
+  
+  <!-- =======================================================
+    Template Name: Dashio
+    Template URL: https://templatemag.com/dashio-bootstrap-admin-template/
+    Author: TemplateMag.com
+    License: https://templatemag.com/license/
+  ======================================================= -->
+</head>
+
+<body>
+  <th:block th:replace="~{/fragment/header :: header}"></th:block>
+  <!-- **********************************************************************************************************************************************************
+      MAIN CONTENT
+      *********************************************************************************************************************************************************** -->
+  <div id="login-page">
+    <div class="container">
+      <div class="form-login">
+        <h2 class="form-login-heading">forgot your id?</h2>
+        <div class="login-wrap">
+          <div class="login-wrapper">
+            <table class="login-inputForm">
+              <tr>
+                <td>이름</td>
+                <td id="login-id"><input type="text" class="form-control" placeholder="이름을 입력해주세요" autofocus name="name"></td>
+              </tr>
+              <tr>
+                <td>휴대전화</td>
+                <td id="login-pw"><input type="password" class="form-control" placeholder="휴대전화를 입력해주세요" name="pass"></td>
+              </tr>
+                
+            </table>
+            <div class="login-buttonForm">
+                <button class="btn btn-theme btn-block login-button" href="index.html" type="submit"><i class="fa fa-lock"></i> 아이디 찾기</button>
+            </div>
+          </div>
+          <div class="login-social-link centered">
+            <div class="login-findForm">
+              <a href="/login/findID" class="login-findForm-btn">아이디 찾기</a> |
+              <a href="/login/findPwd" class="login-findForm-btn">비밀번호 찾기</a> |
+              <a href="/signUp" class="login-findForm-btn">회원가입</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- js placed at the end of the document so the pages load faster -->
+  <script src="/lib/jquery/jquery.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <!--BACKSTRETCH-->
+  <!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
+  <script type="text/javascript" src="/js/jquery.backstretch.min.js"></script>
+  <script>
+    $.backstretch("img/login-bg.jpg", {
+      speed: 500
+    });
+  </script>
+</body>
+
+</html>
