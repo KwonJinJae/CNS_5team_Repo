@@ -29,6 +29,11 @@ public class ChallengeImpl implements ChallengeService {
     }
 
     @Override
+    public ChallengeCertify selectCertifyOne(int cProofNo) {
+        return challengeMapper.selectCertifyOne(cProofNo);
+    }
+
+    @Override
     public void insertNotice(Challenge challenge) {
         challengeMapper.insertNotice(challenge);
     }
