@@ -9,7 +9,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class CarbonInfoFile {
+public class CarbonInfoFileDTO {
 
     private int infoNo;
     private String infoFileName;

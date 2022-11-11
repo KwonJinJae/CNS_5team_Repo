@@ -9,7 +9,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class QuizScore {
+public class QuizScoreDTO {
 
     private int quizScoreNum;
     private int quizScore;

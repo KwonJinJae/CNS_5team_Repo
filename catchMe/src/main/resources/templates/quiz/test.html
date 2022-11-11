@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="oxGameBox">
+  <div class="oxGameStart">
+    <div class="oxgsCon">
+      <div class="oxTitle"><img src="./img/oxGameTitle.png" alt=""/></div>
+
+      <div class="oxText">
+        <div>퀴즈의 끝까지 남는 친구는 누구일까?</div>
+        <div class="whiteText">우리의 환경과 건강</div>
+      </div>
+      <div class="oxgsBgBox">
+        <img src="./img/oxgsBgBox04.png" alt="" class="oxbg04"/>
+        <img src="./img/oxgsBgBox03.png" alt="" class="oxbg03"/>
+        <img src="./img/oxgsBgBox02.png" alt="" class="oxbg02"/>
+        <img src="./img/oxgsBgBox01.png" alt="" class="oxbg01"/>
+
+        <img src="./img/sh_ani1.png" alt="" class="oxbgch01"/>
+        <img src="./img/sh_ani2.png" alt="" class="oxbgch02"/>
+        <img src="./img/sh_ani3.png" alt="" class="oxbgch03"/>
+        <img src="./img/sh_ani4.png" alt="" class="oxbgch04"/>
+        <img src="./img/sh_ani5.png" alt="" class="oxbgch05"/>
+        <img src="./img/sh_ani6.png" alt="" class="oxbgch06"/>
+        <img src="./img/sh_ani7.png" alt="" class="oxbgch07"/>
+        <img src="./img/sh_ani8.png" alt="" class="oxbgch08"/>
+        <img src="./img/sh_ani9.png" alt="" class="oxbgch09"/>
+        <img src="./img/sh_ani10.png" alt="" class="oxbgch10"/>
+
+        <img src="./img/bu_o.png" alt="" class="bu_o bubble"/>
+        <img src="./img/bu_x.png" alt="" class="bu_x bubble"/>
+      </div>
+
+      <div class="oxgsStartBox">
+        <a href="javascript:;">Start</a>
+      </div>
+    </div>
+  </div>
+  <div class="oxGameCharacterSelctBox">
+    <div class="oxTitle"><img src="./img/oxGameTitle_small.png" alt=""/></div>
+    <div class="oxText">
+      <img src="./img/oxgCh_text.png" alt=" 플레이할 동물친구를 선택해주세요"/>
+    </div>
+    <ul class="oxgCharacterList">
+      <li>
+        <div>
+          <a href="javascript:;"><img src="./img/sh_ani1.png" alt="" class=""/> <span>모래고양이</span></a>
+        </div>
+      </li>
+      <li>
+        <div>
+          <a href="javascript:;">
+            <img src="./img/sh_ani2.png" alt="" class=""/>
+            <span>시베리아호랑이</span>
+          </a>
+        </div>
+      </li>
+      <li>
+        <div>
+          <a href="javascript:;">
+            <img src="./img/sh_ani3.png" alt="" class=""/>
+            <span>치타</span>
+          </a>
+        </div>
+      </li>
+      <li>
+        <div>
+          <a href="javascript:;">
+            <img src="./img/sh_ani4.png" alt="" class=""/>
+            <span>황제펭귄</span>
+          </a>
+        </div>
+      </li>
+      <li>
+        <div>
+          <a href="javascript:;"><img src="./img/sh_ani5.png" alt="" class=""/> <span>애기금눈올빼미</span></a>
+        </div>
+      </li>
+      <li>
+        <div>
+          <a href="javascript:;"><img src="./img/sh_ani6.png" alt="" class=""/> <span>북극곰</span></a>
+        </div>
+      </li>
+      <li>
+        <div>
+          <a href="javascript:;"><img src="./img/sh_ani7.png" alt="" class=""/><span>자이언트팬더</span></a>
+        </div>
+      </li>
+      <li>
+        <div>
+          <a href="javascript:;"><img src="./img/sh_ani8.png" alt="" class=""/><span>쿼카</span></a>
+        </div>
+      </li>
+      <li>
+        <div>
+          <a href="javascript:;"><img src="./img/sh_ani9.png" alt="" class=""/><span>사막여우</span></a>
+        </div>
+      </li>
+      <li>
+        <div>
+          <a href="javascript:;"><img src="./img/sh_ani10.png" alt="" class=""/><span>랫서팬더</span></a>
+        </div>
+      </li>
+    </ul>
+
+    <div class="oxText02">
+      <div>
+        10마리의 동물 친구들 중에​<br/>
+        플레이할 동물 1마리를 선택해 주세요.
+      </div>
+      <div class="oxgsStartBox">
+        <a href="javascript:;">문제 풀기</a>
+      </div>
+    </div>
+  </div>
+  <div class="oxGameReady ">
+    <div class="oxGameReadyIn">
+      <div class="stageBox">
+        <img src="./img/oxgame_state.png" alt=""/>
+        <div class="textBox">
+          <div class="stepBox">
+            <span>0</span>단계
+          </div>
+          <div class="stepBox02"><span class="stepBoxIn">0</span>/<span class="oxReadyAll">10</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="oxGameQuiz ">
+    <div class="oxGameQuizTopBox">
+      <div class="oxGameQuizTopLeft">
+        <div class="oxgQTL_TopBox">
+          <img src="./img/oxGameQuiz_leftImg01.png" alt=""/>
+          <div class="stage">
+            <span class="txt01">STAGE</span>
+            <span  class="txt02"><span class="step">0</span>/<span class="oxPlayOnAll">10</span></span>
+          </div>
+
+        </div>
+        <div class="oxgQTL_BotBox">
+          <img src="./img/oxGameQuiz_leftImg02.png" alt=""/>
+          <span class="scoreBox">
+							<span class="scroe">0</span>
+							<img src="./img/scoreText.png" alt=""/>
+						</span>
+        </div>
+      </div>
+      <img src="./img/oxGameTitle_small.png" alt="" class="oxGameTitle" />
+      <div class="oxGameQuizTopRight">
+        <div class="oxgQTR_TopBox">
+          <img src="./img/oxGameQuiz_rImg01.png" alt=""/>
+          <div class="textBox">
+            <span class="txt01">보호막</span>
+          </div>
+
+        </div>
+        <div class="oxgQTR_BotBox">
+          <img src="./img/oxGameQuiz_leftImg02.png" alt=""/>
+          <div class="hartBox">
+            <span><img src="./img/hart_off.png" alt="" class="lose"/><img src="./img/hart_on.png" alt="" class="life" /></span>
+            <span><img src="./img/hart_off.png" alt="" class="lose"/><img src="./img/hart_on.png" alt="" class="life" /></span>
+            <span><img src="./img/hart_off.png" alt="" class="lose "/><img src="./img/hart_on.png" alt="" class="life" /></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="oxGameQuizTextBox">
+      <div class="oxgQtIn">
+        1시간 안에 집 밖에 나갔다 왔다면 손을 닦지 않아도 된다.
+      </div>
+
+      <!-- 0초가되면 on 생성 -->
+      <div class="countBox">
+        <div class="countBoxIn">
+          <strong><span class="timeNum">5</span><span>초</span></strong>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="oxGameOXSelectBox">
+      <div class="oxGameOXSelectBoxIn">
+        <div class="oxgArea">
+          <div class="oxgOArea">
+            <div>O</div>
+            <a href="javascript:;" class="btn oBtn"><img src="./img/o_btn.png" alt=""/></a>
+          </div>
+        </div>
+        <div class="oxgArea">
+          <div class="oxgXArea">
+            <div>X</div>
+            <a href="javascript:;" class="btn xBtn"><img src="./img/x_btn.png" alt=""/></a>
+          </div>
+        </div>
+
+        <div class="characterWrap">
+          <span class="character"><img src="./img/sh_ani1.png" alt=""/></span>
+          <span class="character"><img src="./img/sh_ani2.png" alt=""/></span>
+          <span class="character"><img src="./img/sh_ani3.png" alt=""/></span>
+          <span class="character"><img src="./img/sh_ani4.png" alt=""/></span>
+          <span class="character"><img src="./img/sh_ani5.png" alt=""/></span>
+          <span class="character"><img src="./img/sh_ani6.png" alt=""/></span>
+          <span class="character"><img src="./img/sh_ani7.png" alt=""/></span>
+          <span class="character"><img src="./img/sh_ani8.png" alt=""/></span>
+          <span class="character"><img src="./img/sh_ani9.png" alt=""/></span>
+          <span class="character"><img src="./img/sh_ani10.png" alt=""/></span>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="scoreminusBox">
+      <img src="./img/minus100.png" alt=""/>
+    </div>
+
+    <div class="gamimgInfo">
+      <img src="./img/gameInfo.png" alt=""/>
+    </div>
+  </div>
+
+  <div class="oxGameYes">
+    <div class="oxGameYesIn">
+      <div class="oxGameYesInfoBox">
+        <span class="answer"><img src="./img/yes.png" alt=""/></span>
+
+        <div class="oxGameYesInfoText">
+          <div class="topText">1시간 안에 집 밖에 나갔다 왔다면 ​손을 닦지 않아도 된다.</div>
+          <div class="botText">
+            (질의에 대한 상세 설명 출력)
+            아이들이 정답을 맞췄더라도 해당 질의에 대한
+            상세한 설명이 출력될 수 있도록 구성​
+          </div>
+        </div>
+        <div class="gameingList">
+          <img src="./img/ingTitle.png" alt=""/>
+          <ul>
+            <li><img src="./img/ani1.png" alt="" class=""/></li>
+            <li><img src="./img/ani2.png" alt="" class=""/></li>
+            <li><img src="./img/ani3.png" alt="" class=""/></li>
+            <li><img src="./img/ani4.png" alt="" class=""/></li>
+            <li><img src="./img/ani5.png" alt="" class=""/></li>
+            <li><img src="./img/ani6.png" alt="" class=""/></li>
+            <li><img src="./img/ani7.png" alt="" class=""/></li>
+            <li><img src="./img/ani8.png" alt="" class=""/></li>
+            <li><img src="./img/ani9.png" alt="" class=""/></li>
+            <li><img src="./img/ani10.png" alt="" class=""/></li>
+          </ul>
+        </div>
+
+        <div class="leftfirecracker">
+          <img src="./img/o_icon.png" alt="" class="leftF"/>
+          <img src="./img/o_icon3.png" class="fire"/>
+        </div>
+        <div class="rightfirecracker">
+          <img src="./img/o_icon2.png" alt="" class="rightF"/>
+          <img src="./img/o_icon4.png" class="fire"/>
+        </div>
+        <div class="oxGameQuizBtn" id="quizeNext">
+          <a href="javascript:;">다음문제풀기</a>
+        </div>
+        <div class="oxGameQuizBtn" id="quizeEnd">
+          <a href="javascript:;" class="red">OX퀴즈 완료</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="oxGameNo">
+    <div class="oxGameNoIn">
+      <div class="oxGameNoInfoBox">
+        <span class="answer"><img src="./img/no.png" alt=""/></span>
+
+        <div class="oxGameNoInfoText">
+          <div class="topText">1시간 안에 집 밖에 나갔다 왔다면 ​손을 닦지 않아도 된다.</div>
+          <div class="botText">
+            (질의에 대한 상세 설명 출력)
+            아이들이 정답을 맞췄더라도 해당 질의에 대한
+            상세한 설명이 출력될 수 있도록 구성​
+          </div>
+        </div>
+        <div class="gameingList">
+          <img src="./img/ingTitle.png" alt=""/>
+          <ul>
+            <li><img src="./img/ani1.png" alt="" class=""/></li>
+            <li><img src="./img/ani2.png" alt="" class=""/></li>
+            <li><img src="./img/ani3.png" alt="" class=""/></li>
+            <li><img src="./img/ani4.png" alt="" class=""/></li>
+            <li><img src="./img/ani5.png" alt="" class=""/></li>
+            <li><img src="./img/ani6.png" alt="" class=""/></li>
+            <li><img src="./img/ani7.png" alt="" class=""/></li>
+            <li><img src="./img/ani8.png" alt="" class=""/></li>
+            <li><img src="./img/ani9.png" alt="" class=""/></li>
+            <li><img src="./img/ani10.png" alt="" class=""/></li>
+          </ul>
+        </div>
+        <div class="oxGameQuizBtn" id="quizeNext">
+          <a href="javascript:;">다음문제풀기 <img src="./img/gameInfo2.png" alt="" class="hartminusMark"/></a>
+        </div>
+        <div class="oxGameQuizBtn" id="quizeEnd">
+          <a href="javascript:;" class="red">OX퀴즈 완료</a>
+        </div>
+        <div class="hartminusMarkNext">보호막을 사용해서 다음 문제에 도전할 수 있습니다.</div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="oxGameEnd ">
+    <div class="oxGameEndIn">
+      <div class="oxGameEndTitle">
+        <img src="./img/oxGameTitle_small.png" alt=""/>
+      </div>
+      <div class="myRankingBox">
+        <div class="myranTitle">"환경에 대해 조금알것 같아요."</div>
+        <div class="myRankingBoxIn">
+          <div class="myRanking">
+            <img src="./img/final_ani4.png" id="myIcon" />
+            <div class="myRankingText">
+              나의 순위는
+              <div class="myRankingNum">
+                <span>10</span>위
+              </div>
+            </div>
+          </div>
+          <div class="myRankingScroeStep">
+            <div class="">
+              <div class="txt">최종단계</div>
+              <div class="num"><span class="counter" id="endCounter">10</span>단계</div>
+            </div>
+            <div class="scroe">
+              <div class="txt">최종점수</div>
+              <div class="num"><span class="counter" id="endScore">100000</span>점</div>
+            </div>
+          </div>
+          <div class="gameingfinal">
+            <img src="./img/finalText.png" alt=""/>
+            <ul>
+              <li><img src="./img/ani1.png" alt="" class=""/></li>
+              <li><img src="./img/ani2.png" alt="" class=""/></li>
+              <li><img src="./img/ani3.png" alt="" class=""/></li>
+              <li><img src="./img/ani4.png" alt="" class=""/></li>
+              <li><img src="./img/ani5.png" alt="" class=""/></li>
+              <li><img src="./img/ani6.png" alt="" class=""/></li>
+              <li><img src="./img/ani7.png" alt="" class=""/></li>
+              <li><img src="./img/ani8.png" alt="" class=""/></li>
+              <li><img src="./img/ani9.png" alt="" class=""/></li>
+              <li><img src="./img/ani10.png" alt="" class=""/></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="oxGameQuizBtn">
+        <a href="javascript:;"> 퀴즈 다시 풀기</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="gameTipBox">
+    <a href="javascript:;"><img src="./img/gameTipBtn.png" alt=""/></a>
+  </div>
+
+  <div class="gameTip"> <!--20.10.20 : 게임팁 화면 퍼블 추가-->
+    <div class="gameTipIn">
+      <div class="gameTiptitle">
+        <img src="./img/oxGameTipTitle.png" alt=""/>
+      </div>
+      <div class="gameTipInfoBox">
+        <div class="gameTipInfoList">
+          <ul class="gameTipInfoListIn">
+            <li>
+              <span>1</span><p class="gameTipInfoTxt">마음에 드는 동물친구를 선택하여 퀴즈를 진행해요.</p>
+              <div class=gameTipInfo>
+                <img src="./img/aniSelect.png" alt=""/>
+              </div>
+            </li>
+            <li>
+              <span>2</span><p class="gameTipInfoTxt">퀴즈가 나오면 <strong>OX</strong>를 선택해 주세요.</p>
+              <p class="gameTipInfoTxtSub">정답을 맞춘 친구들은 <strong>다음 문제에 도전</strong>할 수 있어요.</p>
+              <div class=gameTipInfo>
+                <img src="./img/oxSelect.png" alt=""/>
+              </div>
+            </li>
+            <li>
+              <span>3</span><p class="gameTipInfoTxt">틀렸다고 너무 걱정하지 마세요.</p>
+              <p class="gameTipInfoTxtSub"><strong>보호막을 사용</strong>하여 다음 문제에 도전할 수 있어요. <strong>(총 3번)</strong></p>
+              <div class=gameTipInfo>
+                <img src="./img/shildSelect.png" alt=""/>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="oxGameQuizBtn">
+          <a href="javascript:;"> OX 퀴즈 풀기</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+ oxQ.oxPlayStart = function(){
+  oxQ.quizTimeN =  oxQ.quizTime;
+  $(".oxGameQuiz .countBox").removeClass("off").removeClass("on");
+  var thisOX = null;
+  var thisO = 0;
+  var thisX = 0;
+  $(".characterWrap span").each(function(n){
+    if(oxQ.entryN[n][0].indexOf("off") < 0 ){
+      if(oxQ.player === n){
+        $(this).addClass("me");
+      }else{
+        thisOX = oxQ.rendomS(2);
+        oxQ.entryN[n][0] = thisOX === 0 ? "O" : "X";
+        if(thisOX === 0){
+          $(this).addClass("o" + thisO);
+          thisO++;
+        } else{
+          $(this).addClass("x" + thisX);
+          thisX++;
+        }
+      }
+    }else{
+      $(this).addClass("off");
+    }
+  });
+}
+oxQ.quizYes = function(){
+  $(".oxGameYes .topText").text(oxQ.data[oxQ.quiz[(oxQ.stage_now-1)]].que);
+  $(".oxGameYes .botText").text(oxQ.data[oxQ.quiz[(oxQ.stage_now-1)]].com);
+  $(".oxGameYes .oxGameQuizBtn").hide();
+  if(oxQ.stage_now === 10){
+    $(".oxGameYes #quizeEnd").show();
+  }else{
+    $(".oxGameYes #quizeNext").show();
+  }
+  $(".oxGameYes .gameingList li").attr("class","");
+  $(".oxGameYes .gameingList li").each(function(n){
+    if(oxQ.entryN[n][0] != oxQ.data[oxQ.quiz[(oxQ.stage_now-1)]].answer){
+      if(oxQ.entryN[n][1] <= 0){
+        oxQ.entryN[n][0] = "off";
+        $(this).attr("class","off");
+      }else{
+        oxQ.entryN[n][1]--;
+      }
+    }
+    if(oxQ.player === n){
+      $(this).addClass("me");
+    }
+  });
+  $(".oxGameYes").addClass("on");
+}
+oxQ.quizNo = function(){
+  $(".oxGameNo .topText").text(oxQ.data[oxQ.quiz[(oxQ.stage_now-1)]].que);
+  $(".oxGameNo .botText").text(oxQ.data[oxQ.quiz[(oxQ.stage_now-1)]].com);
+  $(".oxGameNo .oxGameQuizBtn").hide();
+  if(oxQ.entryN[oxQ.player][1] <= 0 || oxQ.stage_now === 10){
+    $(".oxGameNo #quizeEnd").show();
+  }else{
+    $(".oxGameNo #quizeNext").show();
+  }
+  $(".oxGameNo .gameingList li").attr("class","");
+  $(".oxGameNo .gameingList li").each(function(n){
+    if(oxQ.entryN[n][0] != oxQ.data[oxQ.quiz[(oxQ.stage_now-1)]].answer){
+      if(oxQ.entryN[n][1] <= 0){
+        oxQ.entryN[n][0] = "off";
+        $(this).attr("class","off");
+      }else{
+        oxQ.entryN[n][1]--;
+      }
+    }
+    if(oxQ.player === n){
+      $(this).addClass("me");
+    }
+  });
+  $(".oxGameNo").addClass("on");
+}
+oxQ.timeS = function(){
+  if(oxQ.quizTimeN > 0){
+    oxQ.quizTimeN--;
+  }else{
+    oxQ.quizTimeN = 0;
+    $(".oxGameQuiz .countBox").addClass("on");
+  }
+  $(".countBox .timeNum").text(oxQ.quizTimeN);
+}
+oxQ.oxRender = function(){
+  $(".oxGameBox").attr("class","oxGameBox ready");
+}
+oxQ.quizFactory = function(total){
+  oxQ.random = oxQ.rendomS(total);
+  console.log(oxQ.random);
+  if (oxQ.quiz.length < oxQ.stage_all && oxQ.quiz.indexOf(oxQ.random) < 0) {
+    oxQ.quiz.push(oxQ.random);
+    return oxQ.quizFactory(total);
+  }else if (oxQ.quiz.length < total){
+    return oxQ.quizFactory(total);
+  }
+}
+</script>
+</body>
+</html>

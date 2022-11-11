@@ -2,12 +2,11 @@ package com.lgUCamp.catchMe.Service;
 
 import com.lgUCamp.catchMe.Controller.CarbonInfoPaging.SelectCriteria;
 import com.lgUCamp.catchMe.DTO.AdminCarbonFile;
-import com.lgUCamp.catchMe.DTO.CarbonInfo;
+import com.lgUCamp.catchMe.DTO.CarbonInfoDTO;
 
-import com.lgUCamp.catchMe.DTO.CarbonInfoFile;
+import com.lgUCamp.catchMe.DTO.CarbonInfoFileDTO;
 import com.lgUCamp.catchMe.Mapper.CarbonInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,7 +19,7 @@ public class CarboninfoServiceImpl implements CarbonInfoService{
     CarbonInfoMapper carbonInfoMapper;
 
     /* 탄소중립 전체 게시글 조회 - 최신 날짜순 정렬 */
-    public ArrayList<CarbonInfo> carbonInfoList(SelectCriteria selectCriteria){
+    public ArrayList<CarbonInfoDTO> carbonInfoList(SelectCriteria selectCriteria){
 
             return carbonInfoMapper.carbonInfoList(selectCriteria);
     }
@@ -41,7 +40,7 @@ public class CarboninfoServiceImpl implements CarbonInfoService{
 
     /* 탄소중립 신규 게시글 등록 */
     @Override
-    public void carbonInfoInsert(CarbonInfo carbonInfo) {
+    public void carbonInfoInsert(CarbonInfoDTO carbonInfo) {
 
         carbonInfoMapper.carbonInfoInsert(carbonInfo);
     }
@@ -55,7 +54,7 @@ public class CarboninfoServiceImpl implements CarbonInfoService{
 
     /* 탄소 중립 게시글 수정 */
     @Override
-    public int carbonInfoModify(CarbonInfo carbonInfo) {
+    public int carbonInfoModify(CarbonInfoDTO carbonInfo) {
 
         return carbonInfoMapper.carbonInfoModify(carbonInfo);
     }
@@ -82,7 +81,7 @@ public class CarboninfoServiceImpl implements CarbonInfoService{
 
     /* 파일 저장 */
     @Override
-    public void carbonInfoFileInsert(CarbonInfoFile carbonInfoFile) {
+    public void carbonInfoFileInsert(CarbonInfoFileDTO carbonInfoFile) {
 
         carbonInfoMapper.carbonInfoFileInsert(carbonInfoFile);
     }

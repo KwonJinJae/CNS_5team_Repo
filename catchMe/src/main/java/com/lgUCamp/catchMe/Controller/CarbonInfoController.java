@@ -3,18 +3,12 @@ package com.lgUCamp.catchMe.Controller;
 import com.lgUCamp.catchMe.Controller.CarbonInfoPaging.Pagenation;
 import com.lgUCamp.catchMe.Controller.CarbonInfoPaging.SelectCriteria;
 import com.lgUCamp.catchMe.DTO.AdminCarbonFile;
-import com.lgUCamp.catchMe.DTO.CarbonInfo;
-import com.lgUCamp.catchMe.DTO.CarbonInfoFile;
+import com.lgUCamp.catchMe.DTO.CarbonInfoDTO;
+import com.lgUCamp.catchMe.DTO.CarbonInfoFileDTO;
 import com.lgUCamp.catchMe.DTO.MessageDTO;
 import com.lgUCamp.catchMe.Service.CarbonInfoService;
-import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +19,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.net.URLDecoder;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -75,7 +68,7 @@ public class CarbonInfoController {
             selectCriteria = Pagenation.getSelectCriteria(pageNo, totalCount, limit, buttonAmount);
         }
 
-        ArrayList<CarbonInfo> carbonInfo = carbonInfoService.carbonInfoList(selectCriteria);
+        ArrayList<CarbonInfoDTO> carbonInfo = carbonInfoService.carbonInfoList(selectCriteria);
 
         model.addAttribute("carbonInfoList", carbonInfo);
         model.addAttribute("selectCriteria", selectCriteria);
@@ -150,9 +143,9 @@ public class CarbonInfoController {
 
     /* 탄소 중립 게시글 등록 */
     @RequestMapping("carbonInfo/carbonInfoRegist/run")
-    public String carbonInfoRegistRun (CarbonInfo carbonInfo, CarbonInfoFile carbonInfoFile,
+    public String carbonInfoRegistRun (CarbonInfoDTO carbonInfo, CarbonInfoFileDTO carbonInfoFile,
                                        Model model, MessageDTO params,
-                                        HttpServletRequest request, @RequestParam(value = "file", required = false) MultipartFile file ) throws IOException {
+                                       HttpServletRequest request, @RequestParam(value = "file", required = false) MultipartFile file ) throws IOException {
 
         /* th:value 에 담아뒀던 관리자 번호를 DTO에 set 해주어 함께 insert 한다.
             지금은 임의로 1을 담아 insert한다.
@@ -191,8 +184,12 @@ public class CarbonInfoController {
 
     /* 탄소 중립 게시글 수정 */
     @PostMapping("/carbonInfo/carbonInfoModifySelect/run")
-    public String carbonInfoModyfy (CarbonInfo carbonInfo, CarbonInfoFile carbonInfoFile, Model model, MessageDTO params,
-                                    HttpServletRequest request, @RequestParam(value = "file", required = false) MultipartFile file) throws IOException {
+    public String carbonInfoModyfy (CarbonInfoDTO carbonInfo, CarbonInfoFileDTO carbonInfoFile, Model model, MessageDTO params,
+                                    HttpServletRequest request, @RequestParam String status,
+                                    @RequestParam(value = "file", required = false) MultipartFile file) throws IOException {
+
+        System.out.println(status);
+//        System.out.println(status2);
 
         /* 업무 로직상 안전성을 위해 테이블 별로 나누어 수정한다. 트랜잭션 처리한다. */
         int modifyResult = carbonInfoService.carbonInfoModify(carbonInfo);
@@ -200,10 +197,27 @@ public class CarbonInfoController {
         int infoNo = carbonInfo.getInfoNo();
 
         /* 사진이 null이 아닐 경우 insert 진행 */
+
+        if("delete".equals(status)){
+
+            /* 저장된 파일 내역 삭제 */
+            new File(carbonInfoFile.getInfoFilePath() +
+                    "/" + carbonInfoFile.getInfoFileName()).delete();
+
+            int deleteFileResult = carbonInfoService.carbonInfoFileDelete(infoNo);
+
+        }
+
+//        if ("uploading".equals(status2)){
+
+            /* 등록한 게시글의 번호를 불러온다. */
+//            carbonInfoFile.setInfoNo(infoNo);
+//            insertImage(file, request, carbonInfoFile);
+
+//        }
         if(file != null){
 
             /* 등록한 게시글의 번호를 불러온다. */
-
             carbonInfoFile.setInfoNo(infoNo);
             insertImage(file, request, carbonInfoFile);
         }
@@ -250,7 +264,7 @@ public class CarbonInfoController {
 
     /* 파일 저장 */
     public void insertImage(@RequestParam("file") MultipartFile file,
-                                                 HttpServletRequest request, CarbonInfoFile carbonInfoFile) throws IOException {
+                                                 HttpServletRequest request, CarbonInfoFileDTO carbonInfoFile) throws IOException {
 
         String filePath = "/carbonInfoFile";
         String savePath = System.getProperty("user.dir")+"/src/main/resources/static"+filePath;
@@ -337,6 +351,12 @@ public class CarbonInfoController {
 
         /* 파일명을 받아 null이 아닐 경우 파일을 먼저 삭제한다. */
         if(adminCarbonFile.getCarbonInfoFileList().getInfoFileName() != null){
+
+            /* 저장된 파일 내역 삭제 */
+            new File(adminCarbonFile.getCarbonInfoFileList().getInfoFilePath() +
+                    "/" + adminCarbonFile.getCarbonInfoFileList().getInfoFileName()).delete();
+
+            /* 파일 정보 삭제 */
             int deleteFileResult = carbonInfoService.carbonInfoFileDelete(infoNo);
         }
         
@@ -361,13 +381,13 @@ public class CarbonInfoController {
     }
 
 
-    @GetMapping("/deleteFile/{infoNo}")
-    public String deleteFile(@PathVariable int infoNo){
-
-        int deleteFileResult = carbonInfoService.carbonInfoFileDelete(infoNo);
-
-            return "redirect:/carbonInfo/carbonInfoDetail?infoNo=" + infoNo;
-    }
+//    @GetMapping("/deleteFile/{infoNo}")
+//    public String deleteFile(@PathVariable int infoNo){
+//
+//        int deleteFileResult = carbonInfoService.carbonInfoFileDelete(infoNo);
+//
+//            return "redirect:/carbonInfo/carbonInfoDetail?infoNo=" + infoNo;
+//    }
 
 
 

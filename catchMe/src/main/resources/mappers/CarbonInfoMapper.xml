@@ -5,7 +5,7 @@
 
 <mapper namespace="com.lgUCamp.catchMe.Mapper.CarbonInfoMapper">
 
-    <resultMap id="carbonInfo" type="com.lgUCamp.catchMe.DTO.CarbonInfo">
+    <resultMap id="carbonInfo" type="com.lgUCamp.catchMe.DTO.CarbonInfoDTO">
         <id column="info_no" property="infoNo"/>
         <result column="info_title" property="infoTitle" />
         <result column="info_date" property="infoDate" />
@@ -15,13 +15,13 @@
         <result column="admin_no" property="adminNo" />
     </resultMap>
 
-    <resultMap id="carbonInfoFile" type="com.lgUCamp.catchMe.DTO.CarbonInfoFile">
+    <resultMap id="carbonInfoFile" type="com.lgUCamp.catchMe.DTO.CarbonInfoFileDTO">
         <result column="info_no" property="infoNo"/>
         <result column="info_file_name" property="infoFileName"/>
         <result column="info_file_path" property="infoFilePath"/>
     </resultMap>
 
-    <resultMap id="admin" type="com.lgUCamp.catchMe.DTO.Admin">
+    <resultMap id="admin" type="com.lgUCamp.catchMe.DTO.AdminDTO">
         <id column="admin_no" property="adminNo"/>
         <result column="admin_job" property="adminJob"/>
         <result column="adminId" property="adminId"/>
@@ -37,13 +37,13 @@
         <result column="info_source" property="infoSource" />
         <result column="admin_no" property="adminNo" />
         <association column="info_no" property="carbonInfoFileList"
-                     javaType="com.lgUCamp.catchMe.DTO.CarbonInfoFile">
+                     javaType="com.lgUCamp.catchMe.DTO.CarbonInfoFileDTO">
             <result column="info_no" property="infoNo" />
             <result column="info_file_name" property="infoFileName"/>
             <result column="info_file_path" property="infoFilePath" />
         </association>
         <association column="adminNo" property="admin"
-                     javaType="com.lgUCamp.catchMe.DTO.Admin">
+                     javaType="com.lgUCamp.catchMe.DTO.AdminDTO">
             <id column="admin_no" property="adminNo"/>
             <result column="admin_job" property="adminJob"/>
             <result column="adminId" property="adminId"/>
@@ -51,17 +51,6 @@
         </association>
 
     </resultMap>
-
-<!--    <select id="carbonInfoList" resultType="com.lgUCamp.catchMe.DTO.CarbonInfo"-->
-<!--                                resultMap="carbonInfo">-->
-<!--        SELECT-->
-<!--               INFO_NO-->
-<!--             , INFO_TITLE-->
-<!--             , INFO_DATE-->
-<!--             , INFO_VIEW-->
-<!--          FROM TBL_CARBON_INFO-->
-<!--         ORDER BY INFO_NO DESC-->
-<!--    </select>-->
 
     <select id="carbonInfoDetail" resultMap="adminCarbonInfoFile"
             resultType="com.lgUCamp.catchMe.DTO.AdminCarbonFile">
@@ -103,7 +92,7 @@
         WHERE A.INFO_NO = #{infoNo}
     </select>
 
-    <insert id="carbonInfoInsert" parameterType="com.lgUCamp.catchMe.DTO.CarbonInfo">
+    <insert id="carbonInfoInsert" parameterType="com.lgUCamp.catchMe.DTO.CarbonInfoDTO">
         INSERT INTO TBL_CARBON_INFO
         (
         INFO_NO, INFO_TITLE, INFO_DATE
@@ -156,7 +145,7 @@
     </select>
 
     <select id="carbonInfoList" resultMap="carbonInfo"
-            resultType="com.lgUCamp.catchMe.DTO.CarbonInfo"
+            resultType="com.lgUCamp.catchMe.DTO.CarbonInfoDTO"
             parameterType="com.lgUCamp.catchMe.Controller.CarbonInfoPaging.SelectCriteria">
 
         SELECT
@@ -205,7 +194,19 @@
 
     <select id="carbonInfoCount" resultType="int" parameterType="java.util.HashMap">
         SELECT COUNT(*)
-          FROM TBL_CARBON_INFO
+          FROM TBL_CARBON_INFO A
+        <where>
+            <if test="searchCondition == 'all'">
+                A.INFO_TITLE LIKE '%' || #{ searchValue } || '%'
+                OR A.INFO_CONTENT LIKE '%' || #{ searchValue } || '%'
+            </if>
+            <if test="searchCondition == 'infoTitle'">
+                A.INFO_TITLE LIKE '%' || #{ searchValue } || '%'
+            </if>
+            <if test="searchCondition == 'infoContent'">
+                A.INFO_CONTENT LIKE '%' || #{ searchValue } || '%'
+            </if>
+        </where>
     </select>
 
 </mapper>

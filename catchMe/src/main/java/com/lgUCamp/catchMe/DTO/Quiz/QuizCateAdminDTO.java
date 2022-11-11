@@ -1,6 +1,6 @@
 package com.lgUCamp.catchMe.DTO.Quiz;
 
-import com.lgUCamp.catchMe.DTO.Admin;
+import com.lgUCamp.catchMe.DTO.AdminDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class QuizCateAdmin {
+public class QuizCateAdminDTO {
 
     private int quizNo;
     private String quizContent;
@@ -19,7 +19,7 @@ public class QuizCateAdmin {
     private int adminNo;
     private int quizCateNo;
 
-    private Admin admin;
-    private QuizCate quizCate;
+    private AdminDTO admin;
+    private QuizCateDTO quizCate;
 
 }

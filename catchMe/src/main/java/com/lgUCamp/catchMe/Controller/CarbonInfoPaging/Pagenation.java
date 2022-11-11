@@ -7,6 +7,12 @@ public class Pagenation {
 		
 		return getSelectCriteria(pageNo, totalCount, limit, buttonAmount, null, null);
 	}
+
+	/* 검색값만 있을 경우 */
+	public static SelectCriteria getSelectCriteria(int pageNo, int totalCount, int limit, int buttonAmount, String searchCondition) {
+
+		return getSelectCriteria(pageNo, totalCount, limit, buttonAmount, searchCondition, null);
+	}
 	
 	/* 검색어 있을 경우 */
 	public static SelectCriteria getSelectCriteria(int pageNo, int totalCount, int limit, int buttonAmount, String searchCondition, String searchValue) {

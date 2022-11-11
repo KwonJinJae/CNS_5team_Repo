@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>CMIC</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+
+
+            quizSelectFunction(quizCateNo, page);
+
+        });
+    </script>
+</head>
+<body>
+<table id="quizTable">
+
+    <tbody>
+
+    </tbody>
+    <form id="waitingForm">
+        <input type="hidden" id="page" name="page" value="1">
+        <input type="hidden" id="quizCateNo" name="quizCateNo" th:value="${quizCateNo}">
+    </form>
+</table>
+
+<div id="paging">
+
+</div>
+
+<script>
+
+    /* 페이징 버튼을 통한 요청 함수 */
+     function waitingPage(category, categoryValue, page){
+
+        console.log("ajax page이동 실행 시도");
+
+        var queryString = {"quizCateNo" : quizCateNo
+                         , "page" : page
+                           };
+        quizSelectFunction(queryString);
+     }
+
+
+     /* 유저가 조건 선택해 검색하는 요청 함수 */
+     function waitingAjax(){
+        console.log("ajax 기본함수 실행 시도");
+
+        var queryString = $("form[name=waitingForm]").serialize();
+        quizSelectFunction(queryString);
+     }
+
+    /* 데이터 불러오기 및 페이징 Ajax */
+    function quizSelectFunction(quizCageNo, page){
+
+        console.log('quizSelectFunction 실행');
+
+         var quizCateNo = $("#quizCateNo").val();
+
+         var page = $("#page").val()
+
+         var queryString = JSON.stringify({  "quizCateNo" : quizCateNo,
+                                             "page" : page
+                                         })
+
+        $.ajax({
+            url : "/api/quiz",
+            data : queryString,
+            type : "POST",
+            dataType : "json",
+            contentType : 'application/json;charset=UTF-8',
+
+            success : function(data) {
+
+                const $table = $("#quizTable tbody");
+                const $div = $("#paging");
+                const quizList = data.quizList;
+
+                console.log(quizList);
+
+                /* 데이터 필드, 페이징 버튼 필드 초기화 */
+                $table.html("");
+                $div.html("");
+
+                for( var index in data.quizList) {
+                    $tr = $("<tr>");
+                    $contentTd = $("<td>").text(data.quizList[index].quizContent);
+                    $tr2 = $("<tr>");
+                    $answerTd = $("<td>").text(data.quizList[index].quizAnswer);
+                    $tr3 = $("<tr>");
+                    $reasonTd = $("<td>").text(data.quizList[index].quizReason);
+
+                        $tr.append($contentTd);
+                        $tr2.append($answerTd);
+                        $tr3.append($reasonTd);
+
+                        $table.append($tr);
+                        $table.append($tr2);
+                        $table.append($tr3);
+
+                    }
+
+                var $startPage = data.startPage;
+                var $endPage = data.endPage;
+                var $currentPage = data.currentPage;
+                var $maxPage = data.maxPage;
+
+                var $nextPage = data.currentPage+1;
+
+                var $beforeStartPage = data.currentPage-1;
+                var $afterEndPage = data.endPage;
+
+                /* if($startPage==0){
+	                  $button = $("<button class='page' disabled><<</button>");
+	                  $div.append($button);
+	               } else {
+	                  $button = $("<button class='page' id='goBackPage' onclick='waitingPage("+$beforeStartPage+")'><<</button>");
+	                  $div.append($button);
+	               } */
+
+	               for(i=$startPage ; i<$endPage ; i++){
+	                  if(i!=$currentPage){
+	                     $button = $("<button class='page' onclick='waitingPage("+(i)+")'>"+(i+1)+"</button>");
+	                  } else {
+	                     $button = $("<button disabled class='page'>"+(i+1)+"</button>");
+	                  }
+
+	                  $div.append($button);
+	               }
+
+	               if($maxPage==$endPage){
+	                  $button = $("<button class='page' disabled> > </button>");
+	                  $div.append($button);
+	               } else {
+	                  $button = $("<button class='page' id='goForwardPage' onclick='waitingAjax("+$nextPage+")'> > </button>");
+	                  $div.append($button);
+	               }
+
+	            },
+	            error : function(error){
+	               alert('서버에서 문제가 발생했습니다. 관리자에게 문의해주세요.')
+	               console.log(error);
+            }
+        });
+    };
+
+
+</script>
+</body>
+</html>

@@ -5,13 +5,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class CarbonInfo {
+public class CarbonInfoDTO {
 
     private int infoNo;
     private String infoTitle;
