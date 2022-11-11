@@ -77,6 +77,13 @@ public class ChallengeController {
         return  "Challenge/Challenge_certify_read";
     };
 
+    @RequestMapping("Challenge/delete/{cProofNo}")
+    public String deleteCertify(Model model,@PathVariable int cProofNo){
+        challengeService.deleteCertify(cProofNo);
+        return "redirect:/Challenge/Challenge_certify";
+
+    }
+
 
 
 
