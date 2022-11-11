@@ -4,7 +4,6 @@ import com.lgUCamp.catchMe.DTO.Admin;
 import com.lgUCamp.catchMe.DTO.AuthDTO;
 import com.lgUCamp.catchMe.DTO.UserDTO;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
 
 import java.util.ArrayList;
 

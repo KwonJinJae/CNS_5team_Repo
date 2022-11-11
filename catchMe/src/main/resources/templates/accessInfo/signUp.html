@@ -25,6 +25,7 @@
   <!-- <link href="css/findform.css" rel="stylesheet"> -->
   <link href="/css/signup.css" rel="stylesheet">
   <link href="/css/style-responsive.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
   
   <!-- =======================================================
     Template Name: Dashio
@@ -41,63 +42,67 @@
       *********************************************************************************************************************************************************** -->
   <div id="login-page">
     <div>
-      <form class="form-login" action="/signUp" method="post">
+      <form class="form-login" action="/signUpProc" method="post">
         <h2 class="form-login-heading">sign up now</h2>
         <div class="signUp-wrap">
           <div class="signUp-row">
             <h5 class="signUp-title"><label for="id">아이디</label></h5>
             <span class="signUp-box">
-              <input id="id" type="text" class="form-control" placeholder="ID" name="user_id" th:value="${userDTO.user_id}">
+              <input id="id" type="text" class="form-control" placeholder="ID" name="userId" th:value="${userDTO.userId}">
             </span>
-            <div th:if="${#fields.hasErrors('userDTO.user_id')}" class="error-msg" th:errors="*{userDTO.user_id}"></div>
+            <div class="error-msg" th:text="${errorId}"></div>
+            <div th:if="${#fields.hasErrors('userDTO.userId')}" class="error-msg" th:errors="*{userDTO.userId}"></div>
           </div>
           <div class="signUp-row">
             <h5 class="signUp-title"><label for="pass1">비밀번호</label></h5>
             <span class="signUp-box">
-              <input id="pass1" type="password" class="form-control" placeholder="Password" name="user_pass">
+              <input id="pass1" type="password" class="form-control" placeholder="Password" name="userPass">
             </span>
-            <div th:if="${#fields.hasErrors('userDTO.user_pass')}" class="error-msg" th:errors="*{userDTO.user_pass}"></div>
+            <div th:if="${#fields.hasErrors('userDTO.userPass')}" class="error-msg" th:errors="*{userDTO.userPass}"></div>
           </div>
           <div class="signUp-row">
             <h5 class="signUp-title"><label for="pass2">비밀번호 확인</label></h5>
             <span class="signUp-box">
-              <input id="pass2" type="password" class="form-control" placeholder="Password" name="user_pass1">
+              <input id="pass2" type="password" class="form-control" placeholder="Password" name="userPass1">
             </span>
+            <div class="error-msg pass-error"></div>
           </div>
           <div class="signUp-row">
             <h5 class="signUp-title"><label for="name">성함</label></h5>
             <span class="signUp-box">
-              <input id="name" type="text" class="form-control" placeholder="Name" name="user_name" th:value="${userDTO.user_name}">
+              <input id="name" type="text" class="form-control" placeholder="Name" name="userName" th:value="${userDTO.userName}">
             </span>
-            <div th:if="${#fields.hasErrors('userDTO.user_name')}" class="error-msg" th:errors="*{userDTO.user_name}"></div>
+            <div th:if="${#fields.hasErrors('userDTO.userName')}" class="error-msg" th:errors="*{userDTO.userName}"></div>
           </div>
           <div class="signUp-row">
             <h5 class="signUp-title"><label for="nickname">닉네임</label></h5>
             <span class="signUp-box">
-              <input id="nickname" type="text" class="form-control" placeholder="Nickname" name="user_nickname" th:value="${userDTO.user_nickname}">
+              <input id="nickname" type="text" class="form-control" placeholder="Nickname" name="userNickname" th:value="${userDTO.userNickname}">
             </span>
-            <div th:if="${#fields.hasErrors('userDTO.user_nickname')}" class="error-msg" th:errors="*{userDTO.user_nickname}"></div>
+            <div class="error-msg" th:text="${errorNickname}"></div>
+            <div th:if="${#fields.hasErrors('userDTO.userNickname')}" class="error-msg" th:errors="*{userDTO.userNickname}"></div>
           </div>
           <div class="signUp-row">
             <h5 class="signUp-title"><label for="birth">생년월일</label></h5>
             <span class="signUp-box">
-              <input id="birth" type="text" class="form-control" placeholder="Birth" maxlength="6" name="user_birth" th:value="${userDTO.user_birth}">
+              <input id="birth" type="text" class="form-control" placeholder="Birth" maxlength="8" name="userBirth" th:value="${userDTO.userBirth}">
             </span>
-            <div th:if="${#fields.hasErrors('userDTO.user_birth')}" class="error-msg" th:errors="*{userDTO.user_birth}"></div>
+            <div th:if="${#fields.hasErrors('userDTO.userBirth')}" class="error-msg" th:errors="*{userDTO.userBirth}"></div>
           </div>
           <div class="signUp-row">
             <h5 class="signUp-title"><label for="mail">이메일 <span class="signUp-select-title">(선택)</span></label></h5>
             <span class="signUp-box">
-              <input id="mail" type="email" class="form-control" placeholder="E-mail" name="user_mail" th:value="${userDTO.user_mail}">
+              <input id="mail" type="email" class="form-control" placeholder="E-mail" name="userMail" th:value="${userDTO.userMail}">
             </span>
-            <div th:if="${#fields.hasErrors('userDTO.user_mail')}" class="error-msg" th:errors="*{userDTO.user_mail}"></div>
+            <div th:if="${#fields.hasErrors('userDTO.userMail')}" class="error-msg" th:errors="*{userDTO.userMail}"></div>
           </div>
           <div class="signUp-row">
             <h5 class="signUp-title"><label for="phone">휴대전화</label></h5>
             <span class="signUp-box">
-              <input id="phone" type="text" class="form-control" placeholder="Phone" name="user_phone" th:value="${userDTO.user_phone}">
+              <input id="phone" type="text" class="form-control" placeholder="Phone" name="userPhone" th:value="${userDTO.userPhone}">
             </span>
-            <div th:if="${#fields.hasErrors('userDTO.user_phone')}" class="error-msg" th:errors="*{userDTO.user_phone}"></div>
+            <div class="error-msg" th:text="${errorPhone}"></div>
+            <div th:if="${#fields.hasErrors('userDTO.userPhone')}" class="error-msg" th:errors="*{userDTO.userPhone}"></div>
           </div>
           <div class="login-social-link centered">
             <div class="login-findForm"></div>
@@ -116,6 +121,7 @@
   <!-- js placed at the end of the document so the pages load faster -->
   <script src="/lib/jquery/jquery.min.js"></script>
   <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/validationcheck.js"></script>
   <!--BACKSTRETCH-->
   <!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
   <script type="text/javascript" src="/js/jquery.backstretch.min.js"></script>

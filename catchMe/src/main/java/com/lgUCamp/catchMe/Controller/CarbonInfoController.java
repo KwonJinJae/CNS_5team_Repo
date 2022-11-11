@@ -1,4 +1,4 @@
-package com.lgUCamp.catchMe.Comtroller;
+package com.lgUCamp.catchMe.Controller;
 
 import com.lgUCamp.catchMe.DTO.AdminCarbonFile;
 import com.lgUCamp.catchMe.DTO.CarbonInfo;

@@ -2,22 +2,23 @@ package com.lgUCamp.catchMe.Controller;
 
 import com.lgUCamp.catchMe.DTO.UserDTO;
 import com.lgUCamp.catchMe.DTO.UserDetail;
+import com.lgUCamp.catchMe.Entity.UserEntity;
 import com.lgUCamp.catchMe.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class UserController {
-
     @Autowired
     UserService userService;
 
@@ -57,24 +58,48 @@ public class UserController {
         return "accessInfo/signUp";
     }
 
-    @PostMapping("/signUp")
+    @PostMapping("/signUpProc")
     public String signUp(@Valid UserDTO userDTO, BindingResult bindingResult, Model model) {
         if(bindingResult.hasErrors()) {
             model.addAttribute("userDTO", userDTO);
-            return "accessInfo/signUp.html";
+
+            if(userService.checkUserIdDuplication(userDTO.getUserId())) {
+                model.addAttribute("errorId", "아이디가 이미 사용되고 있습니다.");
+            }
+
+            if(userService.checkUserNicknameDuplication(userDTO.getUserNickname())) {
+                model.addAttribute("errorNickname", "닉네임이 이미 사용되고 있습니다.");
+            }
+
+            if(userService.checkUserPhoneDuplication(userDTO.getUserPhone())) {
+                model.addAttribute("errorPhone", "휴대전화가 이미 사용되고 있습니다.");
+            }
+
+            return "accessInfo/signUp";
         }
+
         userService.joinUser(userDTO);
         return "redirect:/login";
     }
 
-    @RequestMapping("/test")
-    @ResponseBody
-    public String test() {
-        String html = "";
+    @GetMapping("/signUpProc/{userId}/exists")
+    public boolean checkUserIdDuplicate(@PathVariable String userId){
+        return userService.checkUserIdDuplication(userId);
+    }
 
-        for(UserDTO user : userService.selectAll()) {
-            html += "no: " + user.getUserNo() + ", id: " + user.getUserId() + ", name: " + user.getUserName();
-        }
-        return html;
+    @GetMapping("/signUpProc/{userNickName}/exists")
+    public ResponseEntity<Boolean> checkUserNicknameDuplicate(@PathVariable String userNickName){
+        return ResponseEntity.ok(userService.checkUserNicknameDuplication(userNickName));
+    }
+
+    @GetMapping("/signUpProc/{userPhone}/exists")
+    public ResponseEntity<Boolean> checkUSerPhoneDuplicate(@PathVariable String userPhone){
+        return ResponseEntity.ok(userService.checkUserPhoneDuplication(userPhone));
+    }
+
+    @GetMapping("/test123")
+    public ResponseEntity<List<UserEntity>> getAllmembers() {
+        List<UserEntity> member = userService.findAll();
+        return new ResponseEntity<List<UserEntity>>(member, HttpStatus.OK);
     }
 }

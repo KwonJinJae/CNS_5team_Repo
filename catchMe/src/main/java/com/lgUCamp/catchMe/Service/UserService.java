@@ -4,7 +4,9 @@ import com.lgUCamp.catchMe.DTO.Admin;
 import com.lgUCamp.catchMe.DTO.AuthDTO;
 import com.lgUCamp.catchMe.DTO.UserDTO;
 import com.lgUCamp.catchMe.DTO.UserDetail;
+import com.lgUCamp.catchMe.Entity.UserEntity;
 import com.lgUCamp.catchMe.Mapper.UserMapper;
+import com.lgUCamp.catchMe.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserService implements UserDetailsService{
@@ -22,6 +25,44 @@ public class UserService implements UserDetailsService{
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    @Autowired
+    UserRepository userRepository;
+
+    public List<UserEntity> findAll() {
+        List<UserEntity> users = new ArrayList<>();
+        userRepository.findAll().forEach(e -> users.add(e));
+        return users;
+    }
+
+    public boolean checkUserIdDuplication(String userId) {
+        boolean userIdDuplicate = userRepository.existsByUserId(userId);
+        System.out.println(userIdDuplicate);
+        return userIdDuplicate;
+    }
+
+    public boolean checkUserNicknameDuplication(String userNickname) {
+        boolean nicknameDuplicate = userRepository.existsByUserNickname(userNickname);
+        System.out.println(userNickname);
+        System.out.println(nicknameDuplicate);
+        return nicknameDuplicate;
+
+    }
+
+    public boolean checkUserPhoneDuplication(String userPhone) {
+        boolean phoneDuplicate = userRepository.existsByUserPhone(userPhone);
+        System.out.println(phoneDuplicate);
+        return phoneDuplicate;
+    }
+
+    public boolean checkUserPassValidation(String userPass, String userPass1) {
+        boolean result = false;
+        if(userPass.equals(userPass1)) {
+            result = true;
+        }
+        return result;
+    }
+
 
     @Transactional
     public void joinUser(UserDTO userDTO){
@@ -45,12 +86,10 @@ public class UserService implements UserDetailsService{
 
         if(userDTO != null) {
             user = new UserDetail(userDTO.getUserId(), userDTO.getUserPass(), AuthName);
-            System.out.println("userDTO의 user : "+user);
         }
 
         if(adminDTO != null) {
             user = new UserDetail(adminDTO.getAdminId(), adminDTO.getAdminPass(), AuthName);
-            System.out.println("adminDTO의 admin: "+user);
         }
 
         if (Auths == null){
