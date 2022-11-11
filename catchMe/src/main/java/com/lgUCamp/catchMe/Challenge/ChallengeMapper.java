@@ -27,15 +27,13 @@ public interface ChallengeMapper {
 
 
     void insertNotice(Challenge challenge);
-    //@Insert("insert into TBL_CHALLENGE_PROOF(C_PROOF_NO,C_PROOF_DATE,C_PROOF_TITLE,C_PROOF_CONTENT,C_PROOF_VIEWS,C_NOTICE_NO,C_PROOF_IMG,USER_NO) values (#{cProofNo, jdbcType=NUMERIC}, #{cProofDate, jdbcType=NUMERIC}, #{cProofTitle, jdbcType=VARCHAR}, #{cProofContent, jdbcType=CLOB}, #{cProofViews, jdbcType=NUMERIC},#{cNoticeNo , jdbcType=NUMERIC},#{cProofImg, jdbcType=VARCHAR},#{userNo, jdbcType=NUMERIC}")
+
     void insertCertify(ChallengeCertify challengeCertify);
 
     void deleteNotice(int cNoticeNo);
     void deleteCertify(int cProofNo);
 
-
-//    select * from TBL_CHALLENGE_NOTICE where C_NOTICE_NO='21'
-
+     void updateCertify(int cProofNo);
 
 
 

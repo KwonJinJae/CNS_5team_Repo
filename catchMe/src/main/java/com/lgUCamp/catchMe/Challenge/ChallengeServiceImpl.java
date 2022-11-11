@@ -56,10 +56,10 @@ public class ChallengeServiceImpl implements ChallengeService {
 
     }
 
+    @Override
+    public void updateCertify(int cProofNo) {
+        challengeMapper.updateCertify(cProofNo);
+    }
 
-//    @Override
-//    public Challenge selectOne(int cNoticeNo) {
-//        System.out.println("확인확인2"+challengeMapper.selectOne(1));
-//        return challengeMapper.selectOne(cNoticeNo);
-//    }
+
 }

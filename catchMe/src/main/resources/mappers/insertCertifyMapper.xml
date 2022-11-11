@@ -22,4 +22,9 @@
         delete from TBL_CHALLENGE_PROOF where C_PROOF_NO = #{C_PROOF_NO}
     </delete>
 
+    <update id="updateCertify">
+        update TBL_CHALLENGE_PROOF set C_PROOF_TITLE = #{cProofTitle},
+        C_PROOF_CONTENT = #{cProofContent}, C_PROOF_IMG=#{cProofImg}  where C_PROOF_NO = #{C_PROOF_NO}
+    </update>
+
 </mapper>

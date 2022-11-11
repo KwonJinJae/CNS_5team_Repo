@@ -83,7 +83,15 @@
     </tr>
 
   </table>
-  <button>댓글쓰기</button><button><a th:href="|/Challenge/delete/${chCertify.cProofNo}|">게시글삭제</a></button><button>글수정</button>
+  <button>댓글쓰기</button>
+  <button>
+    <a th:href="|/Challenge/delete/${chCertify.cProofNo}|">
+      게시글 삭제
+    </a>
+  </button>
+  <button><a th:href="|/Challenge/Certifyupdate/${chCertify.cProofNo}|">
+    게시글 수정
+  </a></button>
       <div>
         <br>
         <br>

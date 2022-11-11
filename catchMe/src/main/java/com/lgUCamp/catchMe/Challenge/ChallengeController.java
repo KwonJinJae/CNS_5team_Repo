@@ -84,6 +84,14 @@ public class ChallengeController {
 
     }
 
+    @RequestMapping("Challenge/Certifyupdate/{cProofNo}")
+    public String Certifyupdate(Model model,@PathVariable int cProofNo){
+        challengeService.updateCertify(cProofNo);
+
+        return "Challenge/Challenge_certify_updateform";
+
+    }
+
 
 
 
