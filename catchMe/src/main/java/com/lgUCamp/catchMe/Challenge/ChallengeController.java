@@ -1,6 +1,6 @@
 package com.lgUCamp.catchMe.Challenge;
 
-import com.lgUCamp.catchMe.DTO.CarbonInfo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
