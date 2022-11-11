@@ -13,10 +13,13 @@
         )
         VALUES
         (
-        #{cProofNo}, #{cProofDate}, #{cProofTitle}, #{cProofContent},
-        #{cProofViews, jdbcType=NUMERIC},#{cNoticeNo},#{cProofImg},#{userNo}
+        SEQ_TBL_CHALLENGE_proof.NEXTVAL, sysdate, #{cProofTitle}, #{cProofContent},
+        #{cProofViews, jdbcType=NUMERIC},SEQ_TBL_CHALLENGE_notice.NEXTVAL,#{cProofImg},#{userNo}
         )
     </insert>
 
+    <delete id="deleteCertify" >
+        delete from TBL_CHALLENGE_PROOF where C_PROOF_NO = #{C_PROOF_NO}
+    </delete>
 
 </mapper>

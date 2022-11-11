@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -20,11 +21,6 @@ public class ChallengeController {
     @Autowired
     ChallengeService challengeService;
 
-
-
-
-
-
     @RequestMapping("Challenge/Challenge_main")
     public String ChallengeMain(Model model){
       ArrayList<Challenge> chNotices = challengeService.selectNoticeThree();
@@ -37,6 +33,7 @@ public class ChallengeController {
     @RequestMapping("Challenge/Challenge_certify")
     public String ChallengeCertify(Model model){
         ArrayList<ChallengeCertify> chCertifys = challengeService.selectCertifyAll();
+        System.out.println("============================" + chCertifys);
         model.addAttribute("chCertifys",chCertifys);
         return "Challenge/Challenge_certify";
     }
@@ -60,10 +57,25 @@ public class ChallengeController {
     }
     @RequestMapping("/Challenge/Challenge_certify_writeform/run")
     public String ChallengeCertifyCommentwriteformRun (HttpServletRequest request, ChallengeCertify challengeCertify){
+
+//        challengeCertify.setUserNo(1);
+//        System.out.println(challengeCertify);
+
         System.out.println("안녕하세요" + challengeCertify);
         challengeService.insertCertify(challengeCertify);
         return "redirect:/Challenge/Challenge_certify";
     }
+
+    @RequestMapping("Challenge/Challenge_certify_read/{cProofNo}")
+    public String Challenge_certify_read(@PathVariable int cProofNo, Model model) {
+
+        ChallengeCertify chCertify= challengeService.selectCertifyOne(cProofNo);
+        System.out.println(chCertify);
+
+        model.addAttribute("chCertify", chCertify);
+
+        return  "Challenge/Challenge_certify_read";
+    };
 
 
 
