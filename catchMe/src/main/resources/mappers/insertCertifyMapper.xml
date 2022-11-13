@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lgUCamp.catchMe.Challenge.ChallengeMapper">
+
+    <insert id="insertCertify" parameterType="com.lgUCamp.catchMe.Challenge.ChallengeCertify">
+        INSERT INTO TBL_CHALLENGE_PROOF
+        (
+        C_PROOF_NO,C_PROOF_DATE,C_PROOF_TITLE,C_PROOF_CONTENT
+        ,C_PROOF_VIEWS,C_NOTICE_NO,C_PROOF_IMG,USER_NO
+        )
+        VALUES
+        (
+        SEQ_TBL_CHALLENGE_proof.NEXTVAL, sysdate, #{cProofTitle}, #{cProofContent},
+        #{cProofViews, jdbcType=NUMERIC},SEQ_TBL_CHALLENGE_notice.NEXTVAL,#{cProofImg},#{userNo}
+        )
+    </insert>
+
+    <delete id="deleteCertify" >
+        delete from TBL_CHALLENGE_PROOF where C_PROOF_NO = #{C_PROOF_NO}
+    </delete>
+
+    <update id="updateCertify">
+        update TBL_CHALLENGE_PROOF set C_PROOF_TITLE = #{cProofTitle},
+        C_PROOF_CONTENT = #{cProofContent}, C_PROOF_IMG=#{cProofImg}  where C_PROOF_NO = #{C_PROOF_NO}
+    </update>
+
+</mapper>
