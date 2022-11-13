@@ -1,6 +1,6 @@
 package com.lgUCamp.catchMe.Challenge;
 
-import com.lgUCamp.catchMe.DTO.CarbonInfo;
+//import com.lgUCamp.catchMe.DTO.CarbonInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
@@ -84,10 +84,22 @@ public class ChallengeController {
 
     }
 
-    @RequestMapping("Challenge/Certifyupdate/{cProofNo}")
-    public String Certifyupdate(Model model,@PathVariable int cProofNo){
-        challengeService.updateCertify(cProofNo);
+    @RequestMapping("Challenge/Challenge_certify_updateform/{cProofNo}")
+    public String Certifyupdate(Model model,HttpServletRequest request,@PathVariable int cProofNo){
 
+        // 현재 날짜 구하기
+        LocalDate now = LocalDate.now();
+
+        // 포맷 정의
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+
+        // 포맷 적용
+        String today = now.format(formatter);
+
+        ChallengeCertify chCertify = challengeService.selectCertifyOne(cProofNo);
+
+        model.addAttribute("today", today);
+        model.addAttribute("chCertify",chCertify);
         return "Challenge/Challenge_certify_updateform";
 
     }

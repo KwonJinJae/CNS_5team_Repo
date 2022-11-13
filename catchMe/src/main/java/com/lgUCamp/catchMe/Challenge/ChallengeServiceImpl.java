@@ -57,8 +57,8 @@ public class ChallengeServiceImpl implements ChallengeService {
     }
 
     @Override
-    public void updateCertify(int cProofNo) {
-        challengeMapper.updateCertify(cProofNo);
+    public void updateCertify(ChallengeCertify challengeCertify) {
+        challengeMapper.updateCertify(challengeCertify);
     }
 
 

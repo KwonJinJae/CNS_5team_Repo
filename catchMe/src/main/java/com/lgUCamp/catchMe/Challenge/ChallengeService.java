@@ -16,6 +16,6 @@ public interface ChallengeService {
     void deleteNotice(int cNoticeNo);
     void deleteCertify(int cProofNo);
 
-    void updateCertify(int cProofNo);
+    void updateCertify(ChallengeCertify challengeCertify);
 
 }

@@ -14,7 +14,7 @@
         VALUES
         (
         SEQ_TBL_CHALLENGE_proof.NEXTVAL, sysdate, #{cProofTitle}, #{cProofContent},
-        #{cProofViews, jdbcType=NUMERIC},SEQ_TBL_CHALLENGE_notice.NEXTVAL,#{cProofImg},#{userNo}
+        #{cProofViews, jdbcType=NUMERIC},${cNoticeNo},#{cProofImg},#{userNo}
         )
     </insert>
 
