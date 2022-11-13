@@ -1,0 +1,118 @@
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  margin: 0;
+}
+
+/*LOGIN CONFIGURATION PAGE*/
+.form-login {
+	max-width: 650px;
+    height: 400px;
+	margin: 180px auto 0;
+	background: #fff;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+.form-login h2.form-login-heading {
+	margin: 0;
+	padding: 25px 20px;
+	text-align: center;
+	background: #4DA91C;
+	border-radius: 5px 5px 0 0;
+	-webkit-border-radius: 5px 5px 0 0;
+	color: #fff;
+	font-size: 20px;
+	text-transform: uppercase;
+	font-weight: 500;
+}
+.login-wrap {
+	padding: 20px;
+  border: 1px solid #1a1a1a;
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+}
+
+.login-wrap .registration {
+	text-align: center;
+}
+
+.login-wrapper {
+    display: flex;
+    justify-content: space-around;
+    height: 230px;
+    border-radius: 10px;
+    padding: 20px 16px;
+}
+
+.login-img {
+    width: 300px;
+    height: 200px;
+}
+
+.login-img img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+}
+
+.login-inputForm {
+    width: 300px;
+}
+
+.login-inputForm .form-control {
+    height: 42px;
+}
+
+.login-inputForm #login-id {
+    margin-bottom: 6px;
+}
+
+.login-inputForm #login-id .form-control:focus {
+    border-color: #4DA91C;
+    box-shadow: 0 0 0 0.2rem rgba(77, 169, 28)
+}
+
+.login-inputForm #login-pw {
+    margin-bottom: 3em;
+}
+
+.login-inputForm #login-pw .form-control:focus {
+    border-color: #4DA91C;
+    box-shadow: 0 0 0 0.2rem rgba(77, 169, 28)
+}
+
+.login-inputForm .login-button {
+  height: 48px;
+  border-radius: 10px;
+  background-color: #4DA91C;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, .5);
+  font-weight: 600;
+  color: #fff;
+}
+
+.login-social-link {
+	display: block;
+	margin-top: 20px;
+	margin-bottom: 15px;
+}
+
+.login-social-link .login-findForm {
+    display: flex;
+    margin: 0 48px;
+    justify-content: space-around;
+    margin-bottom: 2em;
+}
+
+.login-social-link .login-findForm .login-findForm-btn {
+    width:  8em;
+    border: 0;
+    outline: 0;
+    background-color: #FFFFFF;
+}
+
+.login-social-link .login-findForm .login-findForm-btn:hover {
+    color: #1a1a1a;
+    
+}

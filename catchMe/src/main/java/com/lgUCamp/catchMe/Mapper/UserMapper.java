@@ -15,7 +15,9 @@ public interface UserMapper {
 
     AdminDTO getAdminInfo(String adminId);
 
-    ArrayList<AuthDTO> getUserAuth(int user_no, int admin_no);
+    ArrayList<AuthDTO> getUserAuth(int userNo, int adminNo);
+
+    UserDTO findUserInfo(String userPhone);
 
     void joinUser(UserDTO userDTO);
 }

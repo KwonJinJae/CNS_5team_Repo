@@ -1,0 +1,30 @@
+.login-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  height: 230px;
+  border-radius: 10px;
+  padding: 20px 16px;
+}
+
+.login-inputForm {
+  width: 500px;
+}
+
+.login-inputForm td:first-child {
+  width: 90px;
+  text-align: right;
+  padding-right: 10px;
+}
+
+.login-buttonForm .login-button {
+  width: 300px;
+  height: 60px;
+  border-radius: 10px;
+  background-color: #4DA91C;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, .5);
+  font-weight: 600;
+  color: #fff;
+  margin-top: 30px;
+  margin-left: 100px;
+}

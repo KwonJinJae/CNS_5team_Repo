@@ -5,11 +5,15 @@
 
 <mapper namespace="com.lgUCamp.catchMe.Mapper.UserMapper">
     <select id="getUserInfo" resultType="com.lgUCamp.catchMe.DTO.UserDTO">
-        SELECT * FROM tbl_user WHERE USER_ID= #{user_id}
+        SELECT * FROM tbl_user WHERE USER_ID= #{userId}
+    </select>
+
+    <select id="findUserInfo" resultType="com.lgUCamp.catchMe.DTO.UserDTO">
+        SELECT * FROM tbl_user WHERE USER_PHONE= #{userPhone}
     </select>
 
     <select id="getAdminInfo" resultType="com.lgUCamp.catchMe.DTO.AdminDTO">
-        SELECT * FROM tbl_admin WHERE admin_id = #{admin_id}
+        SELECT * FROM tbl_admin WHERE admin_id = #{adminId}
     </select>
 
     <select id="getUserAuth" resultType="com.lgUCamp.catchMe.DTO.AuthDTO">
@@ -18,11 +22,11 @@
           WHERE authority_code IN (SELECT authority_code
                                      FROM tbl_admin_user_auth
                                     <where>
-                                        <if test="user_no != 0">
-                                            AND user_no = #{user_no}
+                                        <if test="userNo != 0">
+                                            AND user_no = #{userNo}
                                         </if>
-                                        <if test="admin_no != 0">
-                                            AND admin_no = #{admin_no}
+                                        <if test="adminNo != 0">
+                                            AND admin_no = #{adminNo}
                                         </if>
                                     </where>)
     </select>

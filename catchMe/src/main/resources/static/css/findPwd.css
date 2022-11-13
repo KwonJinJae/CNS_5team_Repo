@@ -1,0 +1,7 @@
+.login-inputForm td:first-child {
+    width: 130px;
+}
+
+.login-buttonForm .login-button {
+    margin-left: 0;
+}

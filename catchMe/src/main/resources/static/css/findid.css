@@ -1,0 +1,20 @@
+.form-login {
+    height : 285px;
+}
+
+.login-wrap {
+    padding: 10px 50px;
+    height : 200px;
+}
+
+.login-buttonForm .login-button {
+    margin: 0 auto 30px;
+}
+
+.login-findForm {
+    display : flex;
+    justify-content: space-evenly;
+    padding-left: 200px;
+    padding-right: 200px;
+}
+

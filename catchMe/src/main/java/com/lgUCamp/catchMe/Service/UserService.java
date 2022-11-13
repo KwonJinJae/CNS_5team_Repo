@@ -22,10 +22,8 @@ import java.util.List;
 public class UserService implements UserDetailsService{
     @Autowired
     UserMapper userMapper;
-
     @Autowired
     PasswordEncoder passwordEncoder;
-
     @Autowired
     UserRepository userRepository;
 
@@ -33,6 +31,12 @@ public class UserService implements UserDetailsService{
         List<UserEntity> users = new ArrayList<>();
         userRepository.findAll().forEach(e -> users.add(e));
         return users;
+    }
+
+    @Transactional
+    public void joinUser(UserDTO userDTO){
+        userDTO.setUserPass(passwordEncoder.encode(userDTO.getUserPass()));
+        userMapper.joinUser(userDTO);
     }
 
     public boolean checkUserIdDuplication(String userId) {
@@ -55,19 +59,8 @@ public class UserService implements UserDetailsService{
         return phoneDuplicate;
     }
 
-    public boolean checkUserPassValidation(String userPass, String userPass1) {
-        boolean result = false;
-        if(userPass.equals(userPass1)) {
-            result = true;
-        }
-        return result;
-    }
-
-
-    @Transactional
-    public void joinUser(UserDTO userDTO){
-        userDTO.setUserPass(passwordEncoder.encode(userDTO.getUserPass()));
-        userMapper.joinUser(userDTO);
+    public UserDTO findUserInfo(String userPhone) {
+        return userMapper.findUserInfo(userPhone);
     }
 
     @Override

@@ -47,23 +47,25 @@
             <h2 class="form-login-heading">forgot your password?</h2>
             <div class="login-wrap">
                 <div class="login-wrapper">
-                    <table class="login-inputForm">
-                        <tr>
-                            <td>새 비밀번호</td>
-                            <td id="login-id"><input type="text" class="form-control" placeholder="재설정할 비밀번호를 입력해주세요"
-                                                     autofocus></td>
-                        </tr>
-                        <tr>
-                            <td>새 비밀번호 확인</td>
-                            <td id="login-pw"><input type="text" class="form-control" placeholder="재설정할 비밀번호 확인을 입력해주세요"></td>
-                        </tr>
-
-                    </table>
-                    <div class="login-buttonForm">
-                        <button class="btn btn-theme btn-block login-button" href="index.html" type="submit"><i
-                                class="fa fa-lock"></i> 비밀번호 찾기
-                        </button>
-                    </div>
+                    <form action="/login/findPwd" method="post">
+                        <table class="login-inputForm">
+                            <tr>
+                                <td>아이디</td>
+                                <td id="login-id"><input type="text" class="form-control" placeholder="아이디를 입력해주세요"
+                                                         name="userId" required autofocus></td>
+                            </tr>
+                            <tr>
+                                <td>휴대전화</td>
+                                <td id="login-pw"><input type="text" class="form-control" placeholder="휴대전화를 입력해주세요"
+                                                         name="userPhone" required></td>
+                            </tr>
+                        </table>
+                        <div class="login-buttonForm">
+                            <button class="btn btn-theme btn-block login-button" type="submit"><i
+                                    class="fa fa-lock"></i> 비밀번호 찾기
+                            </button>
+                        </div>
+                    </form>
                 </div>
                 <div class="login-social-link centered">
                     <div class="login-findForm">

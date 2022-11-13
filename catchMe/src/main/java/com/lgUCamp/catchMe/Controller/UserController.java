@@ -43,16 +43,37 @@ public class UserController {
         return "accessInfo/user_access";
     }
 
-    @RequestMapping("/login/findID")
-    public String findId() {
-
-        return "accessInfo/findID";
+    @GetMapping("/login/findIdForm")
+    public String findIdForm() {
+        return "accessInfo/findIdForm";
     }
 
-    @RequestMapping("/login/findPwd")
-    public String findPwd() {
+    @PostMapping("/login/findId")
+    public String findIdForm(String userName, String userPhone, Model model) {
+        UserDTO user = userService.findUserInfo(userPhone);
 
-        return "accessInfo/findPwd";
+        if(user.getUserName().equals(userName)) {
+            model.addAttribute("userId", user.getUserId());
+            return "accessInfo/findId";
+        }
+
+        return "redirect:/login/findIdForm";
+    }
+
+    @GetMapping("/login/findPwdForm")
+    public String findPwdForm() {
+        return "accessInfo/findPwdForm";
+    }
+
+    @PostMapping("/login/findPwd")
+    public String findPwd(String userId, String userPhone, Model model) {
+        UserDTO user = userService.findUserInfo(userPhone);
+
+        if(user.getUserId().equals(userId)) {
+            return "accessInfo/findPwd";
+        }
+
+        return "redirect:/login/findPwdForm";
     }
 
     @GetMapping("/signUp")
@@ -82,21 +103,6 @@ public class UserController {
 
         userService.joinUser(userDTO);
         return "redirect:/login";
-    }
-
-    @GetMapping("/signUpProc/{userId}/exists")
-    public boolean checkUserIdDuplicate(@PathVariable String userId){
-        return userService.checkUserIdDuplication(userId);
-    }
-
-    @GetMapping("/signUpProc/{userNickName}/exists")
-    public ResponseEntity<Boolean> checkUserNicknameDuplicate(@PathVariable String userNickName){
-        return ResponseEntity.ok(userService.checkUserNicknameDuplication(userNickName));
-    }
-
-    @GetMapping("/signUpProc/{userPhone}/exists")
-    public ResponseEntity<Boolean> checkUSerPhoneDuplicate(@PathVariable String userPhone){
-        return ResponseEntity.ok(userService.checkUserPhoneDuplication(userPhone));
     }
 
     @GetMapping("/test123")
